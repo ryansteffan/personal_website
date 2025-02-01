@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button, ButtonGroup } from "@heroui/button";
+import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
 export default function UnderConstruction() {

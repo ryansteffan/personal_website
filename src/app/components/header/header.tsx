@@ -1,16 +1,16 @@
 "use client";
 
 import type { JSX } from "react";
-import { Button, ButtonGroup } from "@heroui/button";
+import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
-import type page from "~/app/types/page";
+import type linkable from "~/app/components/types/linkable";
 import Link from "next/link";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
 
-  const siteMapPages: page[] = [
+  const siteMapPages: linkable[] = [
     { title: "About Me", link: "about" },
     { title: "My Skills", link: "skills" },
     { title: "Contact Me", link: "contact" },
