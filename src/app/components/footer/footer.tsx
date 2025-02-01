@@ -21,9 +21,9 @@ export default function Footer() {
   return (
     <>
       <div
-        className={`bottom-0 mt-4 flex max-h-[7rem] w-full flex-row justify-between bg-slate-800 p-2`}
+        className={`bottom-0 mt-4 flex max-h-[9rem] w-full flex-row justify-between bg-slate-800 p-2`}
       >
-        <div className="m-2 ml-6 w-fit rounded-md bg-slate-700 p-2 pl-3 shadow-md shadow-slate-900">
+        <div className="m-2 mb-2 ml-6 h-fit w-fit rounded-md bg-slate-700 p-2 pl-3 shadow-md shadow-slate-900">
           <h3 className="text-sm">Site Map:</h3>
           <ul className="flex flex-wrap">{siteMap}</ul>
         </div>

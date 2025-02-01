@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          {children}
+          <div className="min-content-height">{children}</div>
           <Footer />
         </Providers>
       </body>

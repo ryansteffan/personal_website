@@ -4,6 +4,8 @@ import type { JSX } from "react";
 import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
+import Image from "next/image";
+
 import type linkable from "~/app/components/types/linkable";
 import Link from "next/link";
 
@@ -32,8 +34,8 @@ export default function Header(): JSX.Element {
 
   return (
     <>
-      <div className="m-4 flex max-h-14">
-        <div className="mr-2 w-14 align-middle">
+      <div className="m-4 flex max-h-16">
+        <div className="mr-2 w-16 align-middle">
           <Link href={"/"}>
             <img
               src="logo.svg"
