@@ -2,8 +2,8 @@ import "~/styles/globals.css";
 
 import { Providers } from "./providers";
 
-import Footer from "./components/footer/footer";
-import Header from "./components/header/header";
+import Footer from "../components/footer/footer";
+import Header from "../components/header/header";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";

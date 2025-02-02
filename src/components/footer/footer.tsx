@@ -2,7 +2,8 @@
 
 import type { JSX } from "react";
 import { Button } from "@heroui/button";
-import type linkable from "~/app/components/types/linkable";
+import type linkable from "~/components/types/linkable";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
   const siteMapPages: linkable[] = [
@@ -12,9 +13,18 @@ export default function Footer() {
     { title: "My Blog", link: "blog" },
   ];
 
+  const router = useRouter();
+
   const siteMap: JSX.Element[] = siteMapPages.map((map) => (
     <li key={map.title} className="m-2 w-max text-nowrap">
-      <Button color="primary">{map.title}</Button>
+      <Button
+        color="primary"
+        onPressStart={() => {
+          router.push(map.link);
+        }}
+      >
+        {map.title}
+      </Button>
     </li>
   ));
 

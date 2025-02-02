@@ -4,7 +4,7 @@ import type { JSX } from "react";
 import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
-import type linkable from "~/app/components/types/linkable";
+import type linkable from "~/components/types/linkable";
 import Link from "next/link";
 
 export default function Header(): JSX.Element {

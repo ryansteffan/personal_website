@@ -1,4 +1,4 @@
-import UnderConstruction from "~/app/components/under_construction/under_construction";
+import UnderConstruction from "~/components/under_construction/under_construction";
 
 export default function ContactPage(): React.ReactNode {
   return (
