@@ -4,8 +4,6 @@ import type { JSX } from "react";
 import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
-import Image from "next/image";
-
 import type linkable from "~/app/components/types/linkable";
 import Link from "next/link";
 
