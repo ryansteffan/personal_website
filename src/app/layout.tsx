@@ -21,9 +21,15 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable} dark`}>
       <body>
         <Providers>
-          <Header />
-          <div className="min-content-height">{children}</div>
-          <Footer />
+          <div className="flex min-h-screen flex-col">
+            <div className="">
+              <Header />
+            </div>
+            <div className="flex-1">{children}</div>
+            <div className="">
+              <Footer />
+            </div>
+          </div>
         </Providers>
       </body>
     </html>

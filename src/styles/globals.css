@@ -39,7 +39,3 @@ body {
     color-scheme: dark;
   }
 }
-
-.min-content-height {
-  min-height: calc(100vh - 14.8rem);
-}
