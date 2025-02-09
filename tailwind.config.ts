@@ -1,6 +1,6 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
-import { heroui } from "@heroui/theme";
+import { heroui } from "@heroui/react";
 
 export default {
   content: [
@@ -15,5 +15,6 @@ export default {
     },
   },
   darkMode: "class",
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   plugins: [heroui()],
 } satisfies Config;

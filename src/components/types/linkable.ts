@@ -1,4 +1,4 @@
-export default interface linkable {
+export default interface Linkable {
   title: string;
   link: string;
 }

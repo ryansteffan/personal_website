@@ -4,13 +4,13 @@ import type { JSX } from "react";
 import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
-import type linkable from "~/components/types/linkable";
+import type Linkable from "~/components/types/linkable";
 import Link from "next/link";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
 
-  const siteMapPages: linkable[] = [
+  const siteMapPages: Linkable[] = [
     { title: "About Me", link: "about" },
     { title: "My Skills", link: "skills" },
     { title: "Contact Me", link: "contact" },

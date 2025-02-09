@@ -2,11 +2,11 @@
 
 import type { JSX } from "react";
 import { Button } from "@heroui/button";
-import type linkable from "~/components/types/linkable";
+import type Linkable from "~/components/types/linkable";
 import { useRouter } from "next/navigation";
 
 export default function Footer() {
-  const siteMapPages: linkable[] = [
+  const siteMapPages: Linkable[] = [
     { title: "About Me", link: "about" },
     { title: "My Skills", link: "skills" },
     { title: "Contact Me", link: "contact" },
