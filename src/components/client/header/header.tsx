@@ -1,15 +1,10 @@
 "use client";
 
 import type { JSX } from "react";
-import { Button } from "@heroui/button";
-import { useRouter } from "next/navigation";
-
 import type Linkable from "~/components/types/linkable";
 import Link from "next/link";
 
 export default function Header(): JSX.Element {
-  const router = useRouter();
-
   const siteMapPages: Linkable[] = [
     { title: "About Me", link: "about" },
     { title: "My Skills", link: "skills" },
@@ -20,13 +15,7 @@ export default function Header(): JSX.Element {
   // Make a list all the buttons to be used in the header of the website.
   const headerButtons: JSX.Element[] = siteMapPages.map((page) => (
     <li className="h-13 flex" key={page.title}>
-      <Button
-        className="align-middle shadow-sm shadow-black"
-        color="primary"
-        onPressStart={() => router.push(page.link)}
-      >
-        {page.title}
-      </Button>
+      {page.title}
     </li>
   ));
 

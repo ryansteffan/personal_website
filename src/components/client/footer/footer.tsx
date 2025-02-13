@@ -1,7 +1,6 @@
 "use client";
 
 import type { JSX } from "react";
-import { Button } from "@heroui/button";
 import type Linkable from "~/components/types/linkable";
 import { useRouter } from "next/navigation";
 
@@ -17,14 +16,7 @@ export default function Footer() {
 
   const siteMap: JSX.Element[] = siteMapPages.map((map) => (
     <li key={map.title} className="m-2 w-max text-nowrap">
-      <Button
-        color="primary"
-        onPressStart={() => {
-          router.push(map.link);
-        }}
-      >
-        {map.title}
-      </Button>
+      {map.title}
     </li>
   ));
 

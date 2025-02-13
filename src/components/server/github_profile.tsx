@@ -2,13 +2,6 @@
 
 import { data } from "framer-motion/client";
 import { Octokit, App } from "octokit";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardProvider,
-} from "@heroui/react";
 
 export default function GithubProfile() {
   //   const githubApi: Octokit = new Octokit();
@@ -58,11 +51,5 @@ export default function GithubProfile() {
 
   console.log(data);
 
-  return (
-    <>
-      <Card>
-        <CardBody>This is the body of my card</CardBody>
-      </Card>
-    </>
-  );
+  return <></>;
 }
