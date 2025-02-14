@@ -4,7 +4,7 @@ export default function HomePage(): React.ReactNode {
   return (
     <>
       {/* <UnderConstruction /> */}
-      <div className="ml-6 mr-6 h-full rounded-md bg-slate-600 shadow-md shadow-black">
+      {/* <div className="ml-6 mr-6 h-full rounded-md bg-slate-600 shadow-md shadow-black">
         <h1>Hello There!</h1>
         <p>
           Welcome to my website, I am Ryan Steffan. On this page you will
@@ -24,7 +24,7 @@ export default function HomePage(): React.ReactNode {
         <div className="mb-2 ml-6 mr-6 mt-4 h-full w-1/2 rounded-md bg-slate-600 shadow-md shadow-black">
           Side Two
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

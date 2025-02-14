@@ -10,7 +10,7 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ["class", "class"],
+  darkMode: "class", // Ensure dark mode is enabled
   theme: {
     extend: {
       borderRadius: {

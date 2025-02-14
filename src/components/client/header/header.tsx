@@ -1,40 +1,41 @@
 "use client";
+import React, { useState } from "react";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "../../ui/navbar-menu";
+import { cn } from "lib/utils";
 
-import type { JSX } from "react";
-import type Linkable from "~/components/types/linkable";
-import Link from "next/link";
-
-export default function Header(): JSX.Element {
-  const siteMapPages: Linkable[] = [
-    { title: "About Me", link: "about" },
-    { title: "My Skills", link: "skills" },
-    { title: "Contact Me", link: "contact" },
-    { title: "My Blog", link: "blog" },
-  ];
-
-  // Make a list all the buttons to be used in the header of the website.
-  const headerButtons: JSX.Element[] = siteMapPages.map((page) => (
-    <li className="h-13 flex" key={page.title}>
-      {page.title}
-    </li>
-  ));
+export function Header() {
+  const [isDarkTheme, setIsDarkTheme] = useState(true); // Assuming you want to enable dark theme by default
 
   return (
-    <>
-      <div className="m-4 flex max-h-16">
-        <div className="mr-2 w-16 flex-auto align-middle">
-          <Link href={"/"}>
-            <img
-              src="logo.svg"
-              alt="Ryan Steffan's website logo"
-              className="w-fit"
-            />
-          </Link>
-        </div>
-        <ul className="flex w-full flex-auto flex-row justify-around rounded-lg bg-slate-800 p-2 align-middle shadow-sm shadow-black">
-          {headerButtons}
-        </ul>
-      </div>
-    </>
+    <div
+      className={`relative flex w-full items-center justify-center ${isDarkTheme ? "dark" : ""}`}
+    >
+      <Navbar className={`top-3 ${isDarkTheme ? "dark" : ""}`} />
+    </div>
+  );
+}
+
+function Navbar({ className }: { className?: string }) {
+  const [active, setActive] = useState<string | null>(null);
+  return (
+    <div
+      className={cn("fixed inset-x-0 top-10 z-50 mx-auto max-w-2xl", className)}
+    >
+      <Menu setActive={setActive}>
+        <MenuItem setActive={setActive} active={active} item="About">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/about">About Me</HoveredLink>
+            <HoveredLink href="/contact">Contact</HoveredLink>
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Skills">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/skills">My Skills</HoveredLink>
+            <HoveredLink href="/projects">My Projects</HoveredLink>
+          </div>
+        </MenuItem>
+        <HoveredLink href="/blog">My Blog</HoveredLink>
+      </Menu>
+    </div>
   );
 }

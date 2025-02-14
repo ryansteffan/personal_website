@@ -1,12 +1,10 @@
 import "~/styles/globals.css";
 
-import { Providers } from "./providers";
-
-import Footer from "../components/client/footer/footer";
-import Header from "../components/client/header/header";
-
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { Header } from "~/components/client/header/header";
+import { Providers } from "./providers";
+import Footer from "~/components/client/footer/footer";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Home",
@@ -26,9 +24,7 @@ export default function RootLayout({
               <Header />
             </div>
             <div className="flex-1">{children}</div>
-            <div className="">
-              <Footer />
-            </div>
+            <div className="">{/* <Footer /> */}</div>
           </div>
         </Providers>
       </body>
