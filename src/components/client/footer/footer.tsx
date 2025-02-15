@@ -3,6 +3,7 @@
 import type { JSX } from "react";
 import type Linkable from "~/components/types/linkable";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Footer() {
   const siteMapPages: Linkable[] = [
@@ -22,26 +23,14 @@ export default function Footer() {
 
   return (
     <>
-      <div
-        className={`bottom-0 mt-4 flex max-h-[9rem] w-full flex-row justify-between bg-slate-800 p-2`}
-      >
-        <div className="m-2 mb-2 ml-6 h-fit w-fit rounded-md bg-slate-700 p-2 pl-3 shadow-md shadow-slate-900">
-          <h3 className="text-sm">Site Map:</h3>
-          <ul className="flex flex-wrap">{siteMap}</ul>
-        </div>
-        <div className="m-2 mr-6 flex flex-col text-nowrap rounded-md bg-slate-700 p-2 pl-3 pr-3 text-xs shadow-md shadow-slate-900">
-          <p>Copyright: Ryan Steffan, 2025</p>
-          <p>Contact Email: ryansteffan.biz@gmail.com</p>
-          <p>
-            License Details are available:&nbsp;
-            <a
-              href="license"
-              className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-            >
-              here
-            </a>
-          </p>
-        </div>
+      <div className="fixed bottom-0 w-full text-sm">
+        <p>Copyright: Ryan Steffan, 2025</p>
+        <p>
+          License:{" "}
+          <Link href={"/license"} className="hover:underline">
+            Here
+          </Link>
+        </p>
       </div>
     </>
   );
