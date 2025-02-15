@@ -12,7 +12,9 @@ export function Header() {
     <div
       className={`relative flex w-full items-center justify-center font-semibold ${isDarkTheme ? "dark" : ""}`} // Added fixed height
     >
-      <Navbar className={`top-3 ${isDarkTheme ? "dark" : ""}`} />
+      <Navbar
+        className={`top-3 w-4/5 md:w-full ${isDarkTheme ? "dark" : ""}`}
+      />
     </div>
   );
 }
@@ -29,14 +31,42 @@ function Navbar({ className }: { className?: string }) {
         </Link>
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/about">About Me</HoveredLink>
-            <HoveredLink href="/contact">Contact</HoveredLink>
+            <HoveredLink
+              href="/about"
+              onClick={() => {
+                setActive(null);
+              }}
+            >
+              About Me
+            </HoveredLink>
+            <HoveredLink
+              href="/contact"
+              onClick={() => {
+                setActive(null);
+              }}
+            >
+              Contact
+            </HoveredLink>
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Skills">
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/skills">My Skills</HoveredLink>
-            <HoveredLink href="/projects">My Projects</HoveredLink>
+            <HoveredLink
+              href="/skills"
+              onClick={() => {
+                setActive(null);
+              }}
+            >
+              My Skills
+            </HoveredLink>
+            <HoveredLink
+              href="/projects"
+              onClick={() => {
+                setActive(null);
+              }}
+            >
+              My Projects
+            </HoveredLink>
           </div>
         </MenuItem>
         <Link

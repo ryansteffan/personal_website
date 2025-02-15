@@ -21,7 +21,7 @@ export default function RootLayout({
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Header />
-            {children} {/* Added margin-top */}
+            {children}
             <Footer />
           </div>
         </Providers>
