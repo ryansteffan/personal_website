@@ -3,7 +3,7 @@ import { BackgroundBeamsWithCollision } from "../..//ui/background-beams-with-co
 
 export default function HomePageBackground() {
   return (
-    <BackgroundBeamsWithCollision>
+    <BackgroundBeamsWithCollision className="min-h-screen">
       <h2 className="relative z-20 text-center font-sans text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl lg:text-7xl">
         Hello there, I&apos;m Ryan! <br />
         <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
