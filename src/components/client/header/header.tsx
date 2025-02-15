@@ -10,7 +10,7 @@ export function Header() {
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center ${isDarkTheme ? "dark" : ""}`} // Added fixed height
+      className={`relative flex w-full items-center justify-center font-semibold ${isDarkTheme ? "dark" : ""}`} // Added fixed height
     >
       <Navbar className={`top-3 ${isDarkTheme ? "dark" : ""}`} />
     </div>

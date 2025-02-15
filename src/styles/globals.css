@@ -6,35 +6,6 @@ html,
 body {
   @apply bg-white dark:bg-gray-950;
 
-  background: hsla(0, 0%, 0%, 1);
-
-  background: linear-gradient(
-    310deg,
-    hsla(0, 0%, 0%, 1) 9%,
-    hsla(263, 76%, 29%, 1) 45%,
-    hsla(338, 75%, 38%, 1) 97%
-  );
-
-  background: -moz-linear-gradient(
-    310deg,
-    hsla(0, 0%, 0%, 1) 9%,
-    hsla(263, 76%, 29%, 1) 45%,
-    hsla(338, 75%, 38%, 1) 97%
-  );
-
-  background: -webkit-linear-gradient(
-    310deg,
-    hsla(0, 0%, 0%, 1) 9%,
-    hsla(263, 76%, 29%, 1) 45%,
-    hsla(338, 75%, 38%, 1) 97%
-  );
-
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#3E1284", GradientType=1 );
-
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
