@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <>
-      <div className="fixed bottom-0 w-full text-sm">
+      <div className="bottom-0 w-full text-sm">
         <p>Copyright: Ryan Steffan, 2025</p>
         <p>
           License:{" "}
