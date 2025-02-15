@@ -3,6 +3,7 @@ import UnderConstruction from "~/components/client/under_construction/under_cons
 export default function ContactPage(): React.ReactNode {
   return (
     <>
+      <div className="m-16" />
       <UnderConstruction />
     </>
   );
