@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Header } from "~/components/client/header/header";
 import { Providers } from "./providers";
-import Footer from "~/components/client/footer/footer";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Home",

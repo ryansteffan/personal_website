@@ -1,5 +1,3 @@
-import { object } from "zod";
-import UnderConstruction from "../../components/client/under_construction/under_construction";
 import {
   Accordion,
   AccordionContent,
@@ -68,12 +66,16 @@ export default function SkillsPage(): React.ReactNode {
               <li>Active Directory</li>
               <li>Group Policy</li>
               <li>SMB File Sharing</li>
+              <li>VPN</li>
               <li>DNS</li>
               <li>Database Servers (MySQL, MSSQL)</li>
               <li>Virtualization (Proxmox)</li>
               <li>Docker</li>
             </ul>
-            <p className="pt-3"></p>
+            <p className="pt-3">
+              I am also familiar with installing, maintaining, and upgrading
+              computer hardware, such as Laptops and Desktop Computers.
+            </p>
           </>
         ),
       },
