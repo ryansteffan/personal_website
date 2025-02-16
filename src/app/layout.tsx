@@ -17,12 +17,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable} dark`}>
-      <body className="bg-gradient-to-b dark:from-black dark:via-slate-900 dark:to-blue-800">
+      <body className="bg-gradient-to-b dark:from-black dark:via-slate-900 dark:to-blue-900">
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Header />
-            {children} {/* Added margin-top */}
-            <Footer />
+            {children}
           </div>
         </Providers>
       </body>

@@ -6,7 +6,7 @@ import React from "react";
 export default function UnderConstruction() {
   return (
     <>
-      <div className="mx-auto flex h-fit w-2/3 flex-col content-center justify-items-center rounded-md bg-blue-900 p-2 shadow-sm shadow-black md:w-1/3">
+      <div className="mx-auto mb-6 flex h-fit w-2/3 flex-col content-center justify-items-center rounded-md bg-blue-900 p-2 shadow-sm shadow-black md:w-1/3">
         <h1 className="mb-1 text-center font-bold">Hold Up!</h1>
         <p className="text-center">
           This page is a place holder and is currently being worked on.
