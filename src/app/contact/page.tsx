@@ -19,18 +19,25 @@ import contactFormScheme from "~/lib/contact_form_scheme";
 import axios from "axios";
 import { useState } from "react";
 import "./page.css";
+import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 
 export default function ContactPage(): React.ReactNode {
   const [showConsentMessage, setShowConsentMessage] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  const router = useRouter();
 
   async function onSubmit(data: z.infer<typeof contactFormScheme>) {
-    console.log(data);
     if (data.consent === false) {
       setShowConsentMessage(true);
     } else {
       setShowConsentMessage(false);
-      await axios.post("/api/contact", data);
-      console.log("The message was sent.");
+      setShowLoader(true);
+      const result = (await axios.post("/api/contact", data)).status;
+      if (result === 200) {
+        router.push("/contact/success");
+      } else {
+      }
     }
   }
 
@@ -63,10 +70,12 @@ export default function ContactPage(): React.ReactNode {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Contact Email</FormLabel>
+                  <FormLabel className={showLoader ? "hidden" : ""}>
+                    Your Email
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      className="border-blue-500"
+                      className={showLoader ? "hidden" : "border-blue-500"}
                       placeholder="example@example.com"
                       {...field}
                     />
@@ -80,10 +89,12 @@ export default function ContactPage(): React.ReactNode {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Name</FormLabel>
+                  <FormLabel className={showLoader ? "hidden" : ""}>
+                    Your Name
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      className="border-blue-500"
+                      className={showLoader ? "hidden" : "border-blue-500"}
                       placeholder="Your Name"
                       {...field}
                     />
@@ -97,10 +108,16 @@ export default function ContactPage(): React.ReactNode {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
+                  <FormLabel className={showLoader ? "hidden" : ""}>
+                    Message
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      className="h-36 resize-none border-blue-500"
+                      className={
+                        showLoader
+                          ? "hidden"
+                          : "h-36 resize-none border-blue-500"
+                      }
                       placeholder="Your message for me..."
                       {...field}
                     />
@@ -114,9 +131,15 @@ export default function ContactPage(): React.ReactNode {
               name="consent"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex flex-col rounded-md border border-blue-500 pb-3 pl-2 pr-2 pt-3">
+                  <div
+                    className={
+                      showLoader
+                        ? "hidden"
+                        : "flex flex-col rounded-md border border-blue-500 pb-3 pl-2 pr-2 pt-3"
+                    }
+                  >
                     <div className="flex">
-                      <FormLabel className="pr-2">
+                      <FormLabel className={showLoader ? "hidden" : "pr-2"}>
                         I agree for my contact information to be shared.
                       </FormLabel>
                       <FormControl>
@@ -136,7 +159,32 @@ export default function ContactPage(): React.ReactNode {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <div className={showLoader ? "flex justify-center" : "flex"}>
+              <Button className={showLoader ? "hidden" : ""} type="submit">
+                Submit
+              </Button>
+              {showLoader && (
+                <div role="status" className="relative mr-4">
+                  <svg
+                    aria-hidden="true"
+                    className="h-10 w-10 animate-spin fill-blue-600 text-gray-300"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill"
+                    />
+                  </svg>
+                  <span className="sr-only">Loading...</span>
+                </div>
+              )}
+            </div>
           </form>
         </Form>
       </div>
