@@ -2,6 +2,8 @@ import contactFormScheme from "~/lib/contact_form_scheme";
 import { type z, ZodError } from "zod";
 import { EmailClient, KnownEmailSendStatus } from "@azure/communication-email";
 import { env } from "~/env";
+import { JSDOM } from "jsdom";
+import DOMPurify from "dompurify";
 
 export async function POST(request: Request) {
   try {
@@ -16,6 +18,12 @@ export async function POST(request: Request) {
       );
     }
 
+    const window = new JSDOM("").window;
+    const purify = DOMPurify(window);
+    const name = purify.sanitize(data.name);
+    const email = purify.sanitize(data.email);
+    const message = purify.sanitize(data.message);
+
     console.log(`Message Received: ${JSON.stringify(data)}`);
 
     const connectionString = env.COMMUNICATION_SERVICES_CONNECTION_STRING;
@@ -24,8 +32,8 @@ export async function POST(request: Request) {
     const contactMessage = {
       senderAddress: "<DoNotReply@mail.ryansteffan.com>",
       content: {
-        subject: `New Website Message || FROM: ${data.name}`,
-        plainText: data.message,
+        subject: `New Website Message || FROM: ${name}`,
+        plainText: message,
       },
       recipients: {
         to: [
@@ -47,24 +55,29 @@ export async function POST(request: Request) {
       recipients: {
         to: [
           {
-            address: data.email,
-            displayName: data.name,
+            address: email,
+            displayName: name,
           },
         ],
       },
     };
 
     await SendMail(mailClient, contactMessage);
-    await SendMail(mailClient, confirmationMessage);
+    SendMail(mailClient, confirmationMessage).catch(() => {
+      throw Error("Failed to send confirmation.");
+    });
 
     return new Response("Success!", { status: 200 });
   } catch (error) {
     if (error instanceof ZodError) {
       return new Response("Invalid Request!", { status: 400 });
     } else {
-      return new Response("There was an unknown error with the request!", {
-        status: 500,
-      });
+      return new Response(
+        `There was an unknown error with the request: ${String(error)}`,
+        {
+          status: 500,
+        },
+      );
     }
   }
 }
