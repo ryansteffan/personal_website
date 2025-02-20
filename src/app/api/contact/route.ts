@@ -1,18 +1,9 @@
 import contactFormScheme from "~/lib/contact_form_scheme";
 import { type z, ZodError } from "zod";
-import * as nodemailer from "nodemailer";
+import { EmailClient, KnownEmailSendStatus } from "@azure/communication-email";
 import { env } from "~/env";
 
 export async function POST(request: Request) {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    auth: {
-      user: "josefa.hodkiewicz@ethereal.email",
-      pass: "ncCVAhPX3KmFsKs5Bm",
-    },
-  });
-
   try {
     const data: z.infer<typeof contactFormScheme> = contactFormScheme.parse(
       await request.json(),
@@ -27,14 +18,44 @@ export async function POST(request: Request) {
 
     console.log(`Message Received: ${JSON.stringify(data)}`);
 
-    const info = await transporter.sendMail({
-      from: "josefa.hodkiewicz@ethereal.email",
-      to: env.CONTACT_EMAIL,
-      subject: `My Website Contact || ${data.name}`,
-      text: `From: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`,
-    });
+    const connectionString = env.COMMUNICATION_SERVICES_CONNECTION_STRING;
+    const mailClient = new EmailClient(connectionString);
 
-    console.log(info);
+    const contactMessage = {
+      senderAddress: "<DoNotReply@mail.ryansteffan.com>",
+      content: {
+        subject: `New Website Message || FROM: ${data.name}`,
+        plainText: data.message,
+      },
+      recipients: {
+        to: [
+          {
+            address: env.CONTACT_EMAIL,
+            displayName: "Ryan",
+          },
+        ],
+      },
+    };
+
+    const confirmationMessage = {
+      senderAddress: "<DoNotReply@mail.ryansteffan.com>",
+      content: {
+        subject: `Thanks for reaching out...`,
+        plainText:
+          "This is an email confirming that your message was sent to Ryan, he will get back to you as soon as possible.",
+      },
+      recipients: {
+        to: [
+          {
+            address: data.email,
+            displayName: data.name,
+          },
+        ],
+      },
+    };
+
+    await SendMail(mailClient, contactMessage);
+    await SendMail(mailClient, confirmationMessage);
 
     return new Response("Success!", { status: 200 });
   } catch (error) {
@@ -45,5 +66,45 @@ export async function POST(request: Request) {
         status: 500,
       });
     }
+  }
+}
+
+async function SendMail(
+  mailClient: EmailClient,
+  contactMessage: {
+    senderAddress: string;
+    content: { subject: string; plainText: string };
+    recipients: { to: { address: string; displayName: string }[] };
+  },
+) {
+  const poller = await mailClient.beginSend(contactMessage);
+
+  if (!poller.getOperationState().isStarted) {
+    throw Error("Poller was not started.");
+  }
+
+  let timeElapsed = 0;
+  const POLLER_WAIT_TIME = 10;
+
+  while (!poller.isDone()) {
+    await poller.poll();
+    console.log("Email send polling in progress");
+
+    await new Promise((resolve) =>
+      setTimeout(resolve, POLLER_WAIT_TIME * 1000),
+    );
+    timeElapsed += 10;
+
+    if (timeElapsed > 18 * POLLER_WAIT_TIME) {
+      throw Error("Polling timed out.");
+    }
+  }
+
+  if (poller.getResult()?.status === KnownEmailSendStatus.Succeeded) {
+    console.log(
+      `Successfully sent the email (operation id: ${poller.getResult()?.id})`,
+    );
+  } else {
+    throw Error(poller.getResult()?.error?.message);
   }
 }
