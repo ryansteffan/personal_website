@@ -33,8 +33,11 @@ export default function ContactPage(): React.ReactNode {
     } else {
       setShowConsentMessage(false);
       setShowLoader(true);
-      await axios.post("/api/contact", data);
-      router.push("/contact/success");
+      const result = (await axios.post("/api/contact", data)).status;
+      if (result === 200) {
+        router.push("/contact/success");
+      } else {
+      }
     }
   }
 
@@ -68,7 +71,7 @@ export default function ContactPage(): React.ReactNode {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={showLoader ? "hidden" : ""}>
-                    Contact Email
+                    Your Email
                   </FormLabel>
                   <FormControl>
                     <Input
