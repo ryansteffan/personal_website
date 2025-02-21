@@ -1,29 +1,28 @@
 import { Octokit } from "octokit";
 import { env } from "~/env";
-import mockRequest from "~/lib/mock_github";
 import ProjectGrid from "~/components/client/project_grid/project_grid";
 import type { PageItem } from "~/components/types/project_page";
 import { IconBrandGithub } from "@tabler/icons-react";
-import { Boxes } from "~/components/ui/background-boxes";
-import { RepoList } from "~/components/types/GtihubRepoList";
+import { Endpoints } from "@octokit/types";
 
 export default async function ProjectsPage(): Promise<React.ReactNode> {
   const octokit = new Octokit({
     auth: env.GITHUB_TOKEN,
   });
 
-  // const myGithubProfile = await octokit.request("GET /users/TheTurnnip", {
-  //   username: "TheTurnnip",
-  //   headers: {
-  //     "X-GitHub-Api-Version": "2022-11-28",
-  //   },
-  // });
+  const myGithubRepos: Endpoints["GET /users/{username}/repos"]["response"] =
+    await octokit.request("GET /users/{username}/repos", {
+      username: "TheTurnnip",
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
 
-  // const myGithubRepos = await octokit.request("GET /users/TheTurnnip/repos");
+  console.log("Pulled github details.");
 
   const repoItems: PageItem[] = [];
 
-  for (const element of mockRequest) {
+  for (const element of myGithubRepos.data) {
     // Add each cards details here
     repoItems.push({
       title: <a href={element.html_url}>{element.full_name}</a>,
@@ -42,7 +41,7 @@ export default async function ProjectsPage(): Promise<React.ReactNode> {
       <div className="m-16" />
       {/* <UnderConstruction /> */}
       <div className="mx-auto mb-10 rounded-md bg-slate-700 bg-opacity-40 p-5 shadow-md shadow-black">
-        <h2 className="pb-6 font-sans text-4xl font-semibold tracking-tight text-black dark:text-white">
+        <h2 className="pb-6 pl-2 font-sans text-4xl font-semibold tracking-tight text-black dark:text-white">
           My Projects...
         </h2>
         <ProjectGrid items={repoItems} />

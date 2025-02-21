@@ -7,8 +7,8 @@ export default function AboutPage(): React.ReactNode {
     <>
       <div className="mt-32" />
       <div className="mx-auto my-10 max-w-4xl rounded-md bg-slate-700 bg-opacity-40 p-10 pt-8 text-black shadow-sm shadow-black dark:text-white">
-        <h2 className="text-center font-sans text-4xl font-semibold tracking-tight underline">
-          About Me
+        <h2 className="text-center font-sans text-4xl font-semibold tracking-tight">
+          About Me...
         </h2>
         <p className="pt-3">
           Hi, my name is Ryan and I am currently a fourth term Business
