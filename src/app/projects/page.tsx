@@ -3,7 +3,7 @@ import { env } from "~/env";
 import ProjectGrid from "~/components/client/project_grid/project_grid";
 import type { PageItem } from "~/components/types/project_page";
 import { IconBrandGithub } from "@tabler/icons-react";
-import { Endpoints } from "@octokit/types";
+import { type Endpoints } from "@octokit/types";
 
 export default async function ProjectsPage(): Promise<React.ReactNode> {
   const octokit = new Octokit({

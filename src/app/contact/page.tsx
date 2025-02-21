@@ -19,7 +19,6 @@ import contactFormScheme from "~/lib/contact_form_scheme";
 import axios from "axios";
 import { useState } from "react";
 import "./page.css";
-import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 
 export default function ContactPage(): React.ReactNode {

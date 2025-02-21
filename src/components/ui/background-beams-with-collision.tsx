@@ -115,6 +115,7 @@ const CollisionMechanism = React.forwardRef<
       repeatDelay?: number;
     };
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ parentRef, containerRef, beamOptions = {} }, ref) => {
   const beamRef = useRef<HTMLDivElement>(null);
   const [collision, setCollision] = useState<{
@@ -159,6 +160,7 @@ const CollisionMechanism = React.forwardRef<
     const animationInterval = setInterval(checkCollision, 50);
 
     return () => clearInterval(animationInterval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cycleCollisionDetected, containerRef]);
 
   useEffect(() => {

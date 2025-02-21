@@ -1,5 +1,4 @@
 import HomePageBackground from "~/components/client/home_page_bg/home_page_bg";
-import GithubProfile from "~/components/server/github_profile";
 
 export default function HomePage(): React.ReactNode {
   return (
