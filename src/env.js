@@ -19,6 +19,7 @@ export const env = createEnv({
       .default("development"),
     CONTACT_EMAIL: z.string().email(),
     COMMUNICATION_SERVICES_CONNECTION_STRING: z.string(),
+    GITHUB_TOKEN: z.string(),
   },
 
   /**
@@ -43,6 +44,7 @@ export const env = createEnv({
     CONTACT_EMAIL: process.env.CONTACT_EMAIL,
     COMMUNICATION_SERVICES_CONNECTION_STRING:
       process.env.COMMUNICATION_SERVICES_CONNECTION_STRING,
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -61,6 +61,10 @@ module.exports = {
         },
       },
       keyframes: {
+        move: {
+          "0%": { transform: "translateX(-200px)" },
+          "100%": { transform: "translateX(200px)" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -81,6 +85,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        move: "move 5s linear infinite",
       },
     },
   },
