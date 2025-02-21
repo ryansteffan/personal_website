@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       senderAddress: "<DoNotReply@mail.ryansteffan.com>",
       content: {
         subject: `New Website Message || FROM: ${name}`,
-        plainText: message,
+        plainText: `FROM: ${email}\n\n Message:\n${message}`,
       },
       recipients: {
         to: [
