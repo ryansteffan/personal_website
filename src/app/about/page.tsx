@@ -1,7 +1,3 @@
-import Head from "next/head";
-import UnderConstruction from "../../components/client/under_construction/under_construction";
-import Link from "next/link";
-
 export default function AboutPage(): React.ReactNode {
   return (
     <>
