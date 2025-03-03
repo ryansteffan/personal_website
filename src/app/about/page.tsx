@@ -1,3 +1,6 @@
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+
 export default function AboutPage(): React.ReactNode {
   return (
     <>
@@ -19,6 +22,14 @@ export default function AboutPage(): React.ReactNode {
           to connect feel free to reach out to me on LinkedIn, Github, or via
           the contact form on my website.
         </p>
+        <div className="flex justify-center pt-5">
+          <a href="https://www.linkedin.com/in/ryan-steffan/">
+            <FaLinkedin size={50} className="m-2" />
+          </a>
+          <a href="https://github.com/TheTurnnip/">
+            <FaGithub size={50} className="m-2" />
+          </a>
+        </div>
       </div>
     </>
   );
