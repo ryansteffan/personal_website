@@ -160,9 +160,8 @@ export default function SkillsPage(): React.ReactNode {
 
   return (
     <>
-      {/* <UnderConstruction /> */}
-      <div className="mt-32" />
-      <div className="mb-10 ml-40 mr-40 rounded-md bg-slate-700 bg-opacity-40 p-10 text-black shadow-sm shadow-black dark:text-white">
+      <div className="mt-24 md:mt-32" />
+      <div className="m-4 rounded-md bg-slate-700 bg-opacity-40 p-4 text-black shadow-sm shadow-black dark:text-white md:mb-10 md:ml-40 md:mr-40 md:p-10">
         <h2 className="p-4 font-sans text-4xl font-semibold tracking-tight text-black dark:text-white">
           My Skills Are:
         </h2>
