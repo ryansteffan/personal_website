@@ -11,6 +11,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
+import { auth } from "../auth";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -32,10 +33,12 @@ export const users = createTable("user", {
     withTimezone: true,
   }).default(sql`CURRENT_TIMESTAMP`),
   image: varchar("image", { length: 255 }),
+  level: integer("level").default(5),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  blogPosts: many(blogPosts),
 }));
 
 export const accounts = createTable(
@@ -108,3 +111,36 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+// Blog posts tables
+export const blogPosts = createTable("blog_post", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  authorId: varchar("author_id", { length: 255 }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at", {
+    mode: "date",
+    withTimezone: true,
+  }).default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at", {
+    mode: "date",
+    withTimezone: true,
+  }).default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const images = createTable("image", {
+  id: varchar("id").notNull().primaryKey(),
+  url: varchar("url").notNull(),
+});
+
+export const blogPostsRelations = relations(blogPosts, ({ one, many }) => ({
+  author: one(users, { fields: [blogPosts.authorId], references: [users.id] }),
+  images: many(images),
+}));
+
+export const imagesRelations = relations(images, ({ one }) => ({
+  blogPost: one(blogPosts, { fields: [images.id], references: [blogPosts.id] }),
+}));
