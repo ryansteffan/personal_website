@@ -4,8 +4,8 @@ import { FaGithub } from "react-icons/fa";
 export default function AboutPage(): React.ReactNode {
   return (
     <>
-      <div className="mt-32" />
-      <div className="mx-auto my-10 max-w-4xl rounded-md bg-slate-700 bg-opacity-40 p-10 pt-8 text-black shadow-sm shadow-black dark:text-white">
+      <div className="mt-16 md:mt-32" />
+      <div className="mx-auto mb-10 ml-5 mr-5 mt-10 rounded-md bg-slate-700 bg-opacity-40 p-5 pt-8 text-black shadow-sm shadow-black dark:text-white md:mx-auto md:my-10 md:max-w-4xl md:p-10">
         <h2 className="text-center font-sans text-4xl font-semibold tracking-tight">
           About Me...
         </h2>

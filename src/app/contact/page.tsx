@@ -52,9 +52,8 @@ export default function ContactPage(): React.ReactNode {
 
   return (
     <>
-      <div className="mt-24" />
-      {/* <UnderConstruction /> */}
-      <div className="mx-auto my-10 w-2/3 max-w-4xl overflow-auto rounded-md bg-slate-700 bg-opacity-40 p-10 text-black shadow-sm shadow-black dark:text-white">
+      <div className="mt-16 md:mt-24" />
+      <div className="mx-auto my-10 w-4/5 max-w-4xl overflow-auto rounded-md bg-slate-700 bg-opacity-40 p-5 text-black shadow-sm shadow-black dark:text-white md:w-2/3 md:p-10">
         <h2 className="pb-4 font-sans text-4xl font-semibold tracking-tight">
           Contact Me
         </h2>
@@ -134,11 +133,11 @@ export default function ContactPage(): React.ReactNode {
                     className={
                       showLoader
                         ? "hidden"
-                        : "flex flex-col rounded-md border border-blue-500 pb-3 pl-2 pr-2 pt-3"
+                        : "mx-auto flex flex-col rounded-md border border-blue-500 pb-3 pl-2 pr-2 pt-4"
                     }
                   >
                     <div className="flex">
-                      <FormLabel className={showLoader ? "hidden" : "pr-2"}>
+                      <FormLabel className={showLoader ? "hidden" : "md:pr-4"}>
                         I agree for my contact information to be shared.
                       </FormLabel>
                       <FormControl>
@@ -146,6 +145,7 @@ export default function ContactPage(): React.ReactNode {
                           id="consent"
                           checked={field.value}
                           onCheckedChange={field.onChange}
+                          className="mr-2"
                         />
                       </FormControl>
                     </div>

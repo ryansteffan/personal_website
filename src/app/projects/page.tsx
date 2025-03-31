@@ -39,8 +39,7 @@ export default async function ProjectsPage(): Promise<React.ReactNode> {
   return (
     <>
       <div className="m-16" />
-      {/* <UnderConstruction /> */}
-      <div className="mx-auto mb-10 rounded-md bg-slate-700 bg-opacity-40 p-5 shadow-md shadow-black">
+      <div className="mx-auto mb-10 ml-3 mr-3 rounded-md bg-slate-700 bg-opacity-40 p-5 shadow-md shadow-black md:m-auto">
         <h2 className="pb-6 pl-2 font-sans text-4xl font-semibold tracking-tight text-black dark:text-white">
           My Projects...
         </h2>
