@@ -2,6 +2,7 @@ import { relations, sql } from "drizzle-orm";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { int } from "drizzle-orm/mysql-core";
 import {
+  boolean,
   index,
   integer,
   pgTableCreator,
@@ -118,7 +119,9 @@ export const blogPosts = createTable("blog_post", {
     .notNull()
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  authorId: varchar("author_id", { length: 255 }).notNull(),
+  authorId: varchar("author_id", { length: 255 })
+    .notNull()
+    .references(() => users.id),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at", {
@@ -133,6 +136,9 @@ export const blogPosts = createTable("blog_post", {
 
 export const images = createTable("image", {
   id: varchar("id").notNull().primaryKey(),
+  blogPostsId: varchar("blog_post_id", { length: 255 })
+    .notNull()
+    .references(() => blogPosts.id),
   url: varchar("url").notNull(),
 });
 
@@ -144,3 +150,14 @@ export const blogPostsRelations = relations(blogPosts, ({ one, many }) => ({
 export const imagesRelations = relations(images, ({ one }) => ({
   blogPost: one(blogPosts, { fields: [images.id], references: [blogPosts.id] }),
 }));
+
+// Contact API logs
+export const contactApiLogs = createTable("contact_api_log", {
+  id: varchar("id").notNull().primaryKey(),
+  message: text("message").notNull(),
+  ipAddress: varchar("ip_address", { length: 255 }).notNull(),
+  createdAt: timestamp("created_at", {
+    mode: "date",
+    withTimezone: true,
+  }).default(sql`CURRENT_TIMESTAMP`),
+});

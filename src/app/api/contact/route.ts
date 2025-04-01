@@ -4,12 +4,20 @@ import { EmailClient, KnownEmailSendStatus } from "@azure/communication-email";
 import { env } from "~/env";
 import { JSDOM } from "jsdom";
 import DOMPurify from "dompurify";
+import { db } from "~/server/db";
+import { contactApiLogs } from "~/server/db/schema";
 
 export async function POST(request: Request) {
   try {
     const data: z.infer<typeof contactFormScheme> = contactFormScheme.parse(
       await request.json(),
     );
+
+    await db.insert(contactApiLogs).values({
+      id: crypto.randomUUID(),
+      message: data.message,
+      ipAddress: request.headers.get("x-forwarded-for") ?? "unknown",
+    });
 
     if (data.consent == false) {
       return new Response(
