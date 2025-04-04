@@ -55,7 +55,7 @@ function ManagementLink({
   link: string;
 }): React.ReactNode {
   return (
-    <Link href={`management${link}`}>
+    <Link href={`/priv/management${link}`}>
       <div className="mb-2 mt-1 flex w-max rounded-md bg-slate-700 p-2 text-left">
         {children}
       </div>

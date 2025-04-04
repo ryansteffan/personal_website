@@ -5,7 +5,6 @@ import { type Metadata } from "next";
 import { Providers } from "../(public)/providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import ManagementSidebar from "~/components/management_sidebar/management_sidebar";
-import ManagementHeader from "~/components/client/management_header/management_header";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Home",
