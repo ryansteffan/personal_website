@@ -5,6 +5,10 @@ import { env } from "~/env";
 import { JSDOM } from "jsdom";
 import DOMPurify from "dompurify";
 
+export async function GET() {
+  return new Response("ERROR: GET method not allowed", { status: 405 });
+}
+
 export async function POST(request: Request) {
   try {
     const data: z.infer<typeof contactFormScheme> = contactFormScheme.parse(
