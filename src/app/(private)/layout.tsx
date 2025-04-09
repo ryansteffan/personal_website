@@ -4,7 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Providers } from "../(public)/providers";
 import { ClerkProvider } from "@clerk/nextjs";
-import ManagementSidebar from "~/components/management_sidebar/management_sidebar";
+import ManagementSidebar from "~/components/client/management_sidebar/management_sidebar";
 import { env } from "~/env.js";
 
 export const metadata: Metadata = {

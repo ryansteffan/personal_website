@@ -1,29 +1,198 @@
-# Create T3 App
+# Ryan Steffan's Personal Website
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+![Next.js](https://img.shields.io/badge/Next.js-15.2.3-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.3-38b2ac)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-latest-336791)
 
-## What's next? How do I make an app with this?
+A modern, responsive personal website built with Next.js, TypeScript, and Tailwind CSS. Features include a dynamic homepage with animations, an about section, projects showcase integrated with GitHub, skills page, blog functionality, and a contact form.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## 🚀 Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **Interactive Homepage** - Animated background and modern UI
+- **About Me Page** - Professional introduction with social links
+- **Skills Showcase** - Expandable sections detailing technical expertise
+- **Projects Gallery** - Dynamic integration with GitHub repositories
+- **Contact Form** - Email functionality using Azure Communication Services
+- **Blog System** - Content management (currently under development)
+- **Admin Dashboard** - Protected management area for content updates
+- **Authentication** - Secure access control using Clerk
+- **Responsive Design** - Mobile-friendly interface
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## 🛠️ Technologies
 
-## Learn More
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS, Framer Motion
+- **Backend**: Node.js, Next.js API Routes
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: Clerk
+- **Email**: Azure Communication Services
+- **Deployment**: Fly.io with GitHub Actions CI/CD
+- **Other**: GitHub API integration, React Hook Form, Zod validation
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## 🔧 Setup & Installation
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Prerequisites
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- Node.js (v20 or later recommended)
+- npm (10.9.2 or later)
+- PostgreSQL database
 
-## How do I deploy this?
+### Installation Steps
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourname/personal_website.git
+   cd personal_website
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   - Copy `.env.example` to `.env`
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   - Fill in the required environment variables:
+     - Database connection
+     - Authentication credentials
+     - Azure Communication Services connection string
+     - GitHub token
+     - Clerk API keys
+
+4. **Start the database**
+
+   ```bash
+   ./start-database.sh
+   ```
+
+5. **Run migrations**
+
+   ```bash
+   npm run db:push
+   ```
+
+6. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+7. **Open your browser**
+   - Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+personal_website/
+├── src/
+│   ├── app/                  # Next.js App Router
+│   │   ├── (public)/         # Public routes
+│   │   └── (private)/        # Protected routes
+│   ├── components/           # React components
+│   │   ├── client/           # Client-side components
+│   │   └── ui/               # UI components
+│   ├── lib/                  # Utility functions
+│   ├── server/               # Server-side code
+│   │   └── db/               # Database models and configuration
+│   └── styles/               # Global styles
+├── public/                   # Static assets
+├── .github/                  # GitHub workflows
+└── docker-compose.yaml       # Docker configuration
+```
+
+## 💻 Development
+
+### Available Scripts
+
+- **Development server**
+
+  ```bash
+  npm run dev
+  ```
+
+- **Build project**
+
+  ```bash
+  npm run build
+  ```
+
+- **Code linting**
+
+  ```bash
+  npm run lint
+  ```
+
+- **Type checking**
+
+  ```bash
+  npm run typecheck
+  ```
+
+- **Database management**
+  ```bash
+  npm run db:generate   # Generate Drizzle migrations
+  npm run db:push      # Push schema to database
+  npm run db:studio    # Open Drizzle Studio
+  ```
+
+## 🚢 Deployment
+
+The project is configured for deployment to Fly.io using GitHub Actions:
+
+1. Set up secrets in your GitHub repository:
+
+   - `FLY_API_TOKEN`
+   - `CLERK_PUBLISHABLE_KEY`
+
+   The fly api token is used to push to fly, the clerk publishable key is needed in order to generate the pages.
+
+2. Push to the main branch to trigger automatic deployment.
+
+Alternatively, deploy manually:
+
+```bash
+flyctl deploy
+```
+
+## 🐳 Docker
+
+The project includes Docker configuration for containerized deployment:
+
+```bash
+docker-compose up -d
+```
+
+## 🔐 Environment Variables
+
+Required environment variables (see `.env.example` for full list):
+
+- `DATABASE_URL` - PostgreSQL connection string
+- `NODE_ENV` - Environment setting ("development", "test", or "production")
+- `CONTACT_EMAIL` - Email to receive contact form submissions
+- `COMMUNICATION_SERVICES_CONNECTION_STRING` - Azure Communication Services connection
+- `GITHUB_TOKEN` - GitHub API token for repository integration
+- `CLERK_SECRET_KEY` - Authentication secret for Clerk
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Public Clerk API key
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - Authentication sign-in URL
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL` - Redirect URL after sign-in
+- `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL` - Redirect URL after sign-up
+
+## 📄 License
+
+This project is made source available under specific conditions - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Contact
+
+- **Ryan Steffan**
+- GitHub: [TheTurnnip](https://github.com/TheTurnnip/)
+- Email: ryansteffan.biz@gmail.com
+
+---
+
+Built using the [T3 Stack](https://create.t3.gg/)
