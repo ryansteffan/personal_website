@@ -4,6 +4,26 @@ import ProjectGrid from "~/components/client/project_grid/project_grid";
 import type { PageItem } from "~/components/types/project_page";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { type Endpoints } from "@octokit/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ryan Steffan - Projects",
+  description: "The projects page of Ryan Steffan's website.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: [
+    "Ryan Steffan",
+    "coding",
+    "networking",
+    "programming",
+    "projects",
+    "portfolio",
+    "website",
+  ],
+  authors: [{ name: "Ryan Steffan", url: "https://ryansteffan.com" }],
+};
 
 export default async function ProjectsPage(): Promise<React.ReactNode> {
   const octokit = new Octokit({

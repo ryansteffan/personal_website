@@ -1,5 +1,17 @@
+import { Metadata } from "next";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+
+export const metadata: Metadata = {
+  title: "Ryan Steffan - About",
+  description: "The about me page for Ryan Steffan's website.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: ["Ryan Steffan", "about me", "portfolio", "website", "bio"],
+  authors: [{ name: "Ryan Steffan", url: "https://ryansteffan.com" }],
+};
 
 export default function AboutPage(): React.ReactNode {
   return (
