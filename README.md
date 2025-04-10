@@ -147,10 +147,8 @@ The project is configured for deployment to Fly.io using GitHub Actions:
 
 1. Set up secrets in your GitHub repository:
 
-   - `FLY_API_TOKEN`
-   - `CLERK_PUBLISHABLE_KEY`
-
-   The fly api token is used to push to fly, the clerk publishable key is needed in order to generate the pages.
+   - `FLY_API_TOKEN` Give access to deploy code on fly.io
+   - `CLERK_PUBLISHABLE_KEY` Allows for the pages to be generated with
 
 2. Push to the main branch to trigger automatic deployment.
 
@@ -172,6 +170,7 @@ docker-compose up -d
 
 Required environment variables (see `.env.example` for full list):
 
+- `DOMAIN_NAME` - The domain name where the website is hosted
 - `DATABASE_URL` - PostgreSQL connection string
 - `NODE_ENV` - Environment setting ("development", "test", or "production")
 - `CONTACT_EMAIL` - Email to receive contact form submissions

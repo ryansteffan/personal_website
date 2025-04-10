@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "../../../components/ui/accordion";
 import React from "react";
+import type { Metadata } from "next";
 
 interface Skill {
   SkillName: string;
@@ -14,6 +15,27 @@ interface Skill {
 interface SkillsMap {
   Skill: Skill;
 }
+
+export const metadata: Metadata = {
+  title: "Ryan Steffan - Skills",
+  description: "My skills page for Ryan Steffan's website.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: [
+    "Ryan Steffan",
+    "home page",
+    "portfolio",
+    "website",
+    "skills",
+    "coding",
+    "networking",
+    "programming",
+    "technology",
+  ],
+  authors: [{ name: "Ryan Steffan", url: "https://ryansteffan.com" }],
+};
 
 export default function SkillsPage(): React.ReactNode {
   const mySkills: SkillsMap[] = [
