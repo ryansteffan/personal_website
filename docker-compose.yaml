@@ -10,7 +10,7 @@ services:
     working_dir: /app
     ports:
       - "3000:3000"
-    image: t3-app
+    image: personal_website
     environment:
       - DATABASE_URL="postgresql://postgres:${DB_PASS}@localhost:5432/personal_website"
       - CONTACT_EMAIL=${CONTACT_EMAIL}

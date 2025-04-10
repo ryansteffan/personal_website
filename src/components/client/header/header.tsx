@@ -5,6 +5,7 @@ import { cn } from "~/lib/utils";
 import Link from "next/link";
 
 export function Header() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isDarkTheme, setIsDarkTheme] = useState(true); // Assuming you want to enable dark theme by default
 
   return (

@@ -5,7 +5,6 @@ import { type Metadata } from "next";
 import { Header } from "~/components/client/header/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./providers";
-import { env } from "~/env.js";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Home",

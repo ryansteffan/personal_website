@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import HomePageBackground from "~/components/client/home_page_bg/home_page_bg";
 
 export const metadata: Metadata = {

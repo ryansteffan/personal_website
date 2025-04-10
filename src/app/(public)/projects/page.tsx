@@ -4,7 +4,7 @@ import ProjectGrid from "~/components/client/project_grid/project_grid";
 import type { PageItem } from "~/components/types/project_page";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { type Endpoints } from "@octokit/types";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Projects",

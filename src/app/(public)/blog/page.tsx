@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import UnderConstruction from "../../../components/client/under_construction/under_construction";
 
 export const metadata: Metadata = {
