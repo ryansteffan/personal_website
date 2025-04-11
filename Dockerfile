@@ -37,7 +37,7 @@ RUN \
 
 ##### RUNNER
 
-FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
+FROM --platform=linux/amd64 node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production

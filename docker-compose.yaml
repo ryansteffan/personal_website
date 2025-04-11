@@ -7,10 +7,12 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_CLIENTVAR: "clientvar"
+        DOMAIN_NAME: "localhost"
+        CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     working_dir: /app
     ports:
       - "3000:3000"
-    image: personal_website
+    image: personal-site
     environment:
       - DATABASE_URL="postgresql://postgres:${DB_PASS}@localhost:5432/personal_website"
       - CONTACT_EMAIL=${CONTACT_EMAIL}

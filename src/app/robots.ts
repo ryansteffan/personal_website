@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { env } from "~/env";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,5 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api", "/priv"],
       },
     ],
+    sitemap: `https://${env.DOMAIN_NAME}/sitemap.xml`,
   };
 }
