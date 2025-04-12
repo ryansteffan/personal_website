@@ -1,3 +1,4 @@
+import { desc } from "drizzle-orm";
 import type { Metadata } from "next";
 import {
   Pagination,
@@ -8,6 +9,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
+import { db } from "~/server/db";
+import { blogPosts } from "~/server/db/schema";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Blog",
@@ -29,7 +32,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Ryan Steffan", url: "https://ryansteffan.com" }],
 };
 
-export default function BlogPage(): React.ReactNode {
+export default async function BlogPage(): Promise<React.ReactNode> {
+  const recentBlogPosts = await db
+    .select()
+    .from(blogPosts)
+    .orderBy(desc(blogPosts.updatedAt))
+    .limit(5);
+
+  console.log(recentBlogPosts);
   return (
     <>
       <div className="m-16" />
@@ -46,7 +56,16 @@ export default function BlogPage(): React.ReactNode {
         <div className="w-full border-spacing-4 border-b border-slate-700" />
         <div className="w h-40"></div>
         <div className="w-full border-spacing-4 border-b border-slate-700" />
-
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="/blog/2/" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
         <div className="w-full border-spacing-4 border-b border-slate-700" />
       </div>
     </>

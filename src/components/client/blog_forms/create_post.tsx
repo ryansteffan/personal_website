@@ -17,7 +17,7 @@ import {
 import { Input } from "~/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import PostResponse from "~/components/types/create_post_response";
+import CreatePostResponse from "~/components/types/create_post_response";
 
 export default function CreatePostForm() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function CreatePostForm() {
     // ✅ This will be type-safe and validated.
     const data = { ...values, date: new Date() };
     try {
-      const result = await axios.post<PostResponse>(
+      const result = await axios.post<CreatePostResponse>(
         "/priv/api/blog/create_post",
         data,
       );

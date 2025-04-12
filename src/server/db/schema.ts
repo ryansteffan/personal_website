@@ -21,10 +21,7 @@ export const createTable = pgTableCreator((name) => `personal_website_${name}`);
 
 // Blog posts tables
 export const blogPosts = createTable("blog_post", {
-  id: varchar("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: integer("id").notNull().primaryKey().generatedAlwaysAsIdentity(),
   author: varchar("author", { length: 255 }).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),
@@ -39,8 +36,8 @@ export const blogPosts = createTable("blog_post", {
 });
 
 export const images = createTable("image", {
-  id: varchar("id").notNull().primaryKey(),
-  blogPostId: varchar("blog_post_id", { length: 255 })
+  id: integer("id").notNull().primaryKey().generatedAlwaysAsIdentity(),
+  blogPostId: integer("blog_post_id")
     .notNull()
     .references(() => blogPosts.id),
   url: varchar("url").notNull(),

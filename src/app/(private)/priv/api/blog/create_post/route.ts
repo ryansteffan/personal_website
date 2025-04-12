@@ -6,7 +6,7 @@ import DOMPurify from "dompurify";
 import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";
 import { NextResponse } from "next/server";
-import PostResponse from "~/components/types/create_post_response";
+import CreatePostResponse from "~/components/types/create_post_response";
 
 export async function POST(request: Request) {
   await auth.protect();
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       })
       .returning({ postId: blogPosts.id });
 
-    const responseData: PostResponse = {
+    const responseData: CreatePostResponse = {
       message: "Post created successfully!",
       postId: postID[0]?.postId.toString(),
     };
