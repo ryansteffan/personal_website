@@ -11,6 +11,16 @@ import {
 } from "~/components/ui/pagination";
 import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import React from "react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Blog",
@@ -53,9 +63,32 @@ export default async function BlogPage(): Promise<React.ReactNode> {
           experiences from my journey in tech. Explore the posts below and check
           back for new content!
         </p>
-        <div className="w-full border-spacing-4 border-b border-slate-700" />
-        <div className="w h-40"></div>
-        <div className="w-full border-spacing-4 border-b border-slate-700" />
+        <div className="w-full border-spacing-4 border-b border-slate-500" />
+        <div className="min-h-40">
+          {recentBlogPosts.map((post): React.ReactNode => {
+            return (
+              <div key={post.id}>
+                <Card className="mb-2 mt-2 bg-slate-900">
+                  <CardHeader>
+                    <CardTitle>{post.title}</CardTitle>
+                    <CardDescription className="">
+                      Author: {post.author} | Posted:{" "}
+                      {post.createdAt?.toDateString()} | Updated:{" "}
+                      {post.updatedAt?.toDateString()}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>{post.content.substring(0, 500)}...</CardContent>
+                  <CardFooter>
+                    <Link href={`/blog/posts/${post.id}/`}>
+                      Read full post...
+                    </Link>
+                  </CardFooter>
+                </Card>
+              </div>
+            );
+          })}
+        </div>
+        <div className="w-full border-spacing-4 border-b border-slate-500" />
         <Pagination>
           <PaginationContent>
             <PaginationItem>
@@ -66,7 +99,7 @@ export default async function BlogPage(): Promise<React.ReactNode> {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-        <div className="w-full border-spacing-4 border-b border-slate-700" />
+        <div className="w-full border-spacing-4 border-b border-slate-500" />
       </div>
     </>
   );
