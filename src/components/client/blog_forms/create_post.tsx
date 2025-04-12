@@ -49,8 +49,8 @@ export default function CreatePostForm() {
         if (postId === undefined) {
           router.push("/priv/management/blog/failure");
         }
-
-        router.push(`/blog/${postId}`);
+        console.log("Post Created: ", postId);
+        // router.push(`/blog/${postId}`);
       } else {
         console.log("Post Creation Failed!");
       }
