@@ -28,11 +28,15 @@ export const blogPosts = createTable("blog_post", {
   createdAt: timestamp("created_at", {
     mode: "date",
     withTimezone: true,
-  }).default(sql`CURRENT_TIMESTAMP`),
+  })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
   updatedAt: timestamp("updated_at", {
     mode: "date",
     withTimezone: true,
-  }).default(sql`CURRENT_TIMESTAMP`),
+  })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 export const images = createTable("image", {
