@@ -71,7 +71,7 @@ export default async function BlogPage(): Promise<React.ReactNode> {
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
+              <p className="text-md ml-2 mr-2">Page: 1</p>
             </PaginationItem>
             <PaginationItem>
               <PaginationNext href="/blog/2/" />
