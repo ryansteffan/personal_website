@@ -19,49 +19,36 @@ import {
  */
 export const createTable = pgTableCreator((name) => `personal_website_${name}`);
 
-export const users = createTable("user", {
-  id: varchar("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: varchar("name", { length: 255 }),
-});
-
-export const usersRelations = relations(users, ({ many }) => ({
-  blogPosts: many(blogPosts),
-}));
-
 // Blog posts tables
 export const blogPosts = createTable("blog_post", {
-  id: varchar("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  authorId: varchar("author_id", { length: 255 })
-    .notNull()
-    .references(() => users.id),
+  id: integer("id").notNull().primaryKey().generatedAlwaysAsIdentity(),
+  author: varchar("author", { length: 255 }).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at", {
     mode: "date",
     withTimezone: true,
-  }).default(sql`CURRENT_TIMESTAMP`),
+  })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
   updatedAt: timestamp("updated_at", {
     mode: "date",
     withTimezone: true,
-  }).default(sql`CURRENT_TIMESTAMP`),
+  })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 export const images = createTable("image", {
-  id: varchar("id").notNull().primaryKey(),
-  blogPostId: varchar("blog_post_id", { length: 255 })
+  id: integer("id").notNull().primaryKey().generatedAlwaysAsIdentity(),
+  blogPostId: integer("blog_post_id")
     .notNull()
     .references(() => blogPosts.id),
   url: varchar("url").notNull(),
+  imageName: varchar("image_name").notNull(),
 });
 
-export const blogPostsRelations = relations(blogPosts, ({ one, many }) => ({
-  author: one(users, { fields: [blogPosts.authorId], references: [users.id] }),
+export const blogPostsRelations = relations(blogPosts, ({ many }) => ({
   images: many(images),
 }));
 

@@ -18,7 +18,6 @@ import { Checkbox } from "~/components/ui/checkbox";
 import contactFormScheme from "~/lib/contact_form_scheme";
 import axios from "axios";
 import { useState } from "react";
-import "./page.css";
 import { useRouter } from "next/navigation";
 
 export default function ContactPage(): React.ReactNode {
