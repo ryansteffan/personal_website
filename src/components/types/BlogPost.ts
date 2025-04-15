@@ -1,8 +1,8 @@
 export default interface BlogPost {
-  id: string;
+  id: number;
   title: string;
   content: string;
-  dateCreated: Date;
-  dateUpdated: Date;
-  authorId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  author: string;
 }

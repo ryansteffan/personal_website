@@ -10,15 +10,6 @@ import {
 } from "~/components/ui/card";
 import { SelectRandomListElement } from "~/lib/utils";
 
-export interface BlogCardProps {
-  id: number;
-  title: string;
-  author: string;
-  content: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 const titleColors = [
   "text-blue-300",
   "text-green-300",
@@ -34,7 +25,7 @@ const titleColors = [
 export default function BlogCard({
   post,
 }: {
-  post: BlogCardProps;
+  post: BlogPost;
 }): React.ReactNode {
   return (
     <div key={post.id}>
