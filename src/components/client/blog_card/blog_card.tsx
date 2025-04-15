@@ -28,29 +28,24 @@ export default function BlogCard({
   post: BlogPost;
 }): React.ReactNode {
   return (
-    <div key={post.id}>
-      <Card className="mb-2 mt-2 bg-slate-900">
-        <CardHeader>
-          <CardTitle
-            className={`text-xl ${SelectRandomListElement<string>(titleColors)}`}
-          >
-            {post.title}
-          </CardTitle>
-          <CardDescription className="">
-            Author: {post.author} | Posted: {post.createdAt?.toDateString()} |
-            Updated: {post.updatedAt?.toDateString()}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>{post.content.substring(0, 500)}...</CardContent>
-        <CardFooter>
-          <Link
-            className="hover:text-blue-300"
-            href={`/blog/posts/${post.id}/`}
-          >
-            Read full post...
-          </Link>
-        </CardFooter>
-      </Card>
-    </div>
+    <Card className="mb-2 mt-2 min-w-96 bg-slate-900">
+      <CardHeader>
+        <CardTitle
+          className={`text-xl ${SelectRandomListElement<string>(titleColors)}`}
+        >
+          {post.title}
+        </CardTitle>
+        <CardDescription className="">
+          Author: {post.author} | Posted: {post.createdAt?.toDateString()} |
+          Updated: {post.updatedAt?.toDateString()}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>{post.content.substring(0, 500)}...</CardContent>
+      <CardFooter>
+        <Link className="hover:text-blue-300" href={`/blog/posts/${post.id}/`}>
+          Read full post...
+        </Link>
+      </CardFooter>
+    </Card>
   );
 }
