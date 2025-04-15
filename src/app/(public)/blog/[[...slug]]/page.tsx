@@ -110,5 +110,6 @@ async function GetBlogPosts(cursor: number, pageSize = 3): Promise<BlogPost[]> {
     .select()
     .from(blogPosts)
     .where(gt(blogPosts.id, cursor * pageSize - pageSize))
-    .limit(pageSize);
+    .limit(pageSize)
+    .orderBy(desc(blogPosts.updatedAt));
 }
