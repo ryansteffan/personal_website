@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/card";
 import { SelectRandomListElement } from "~/lib/utils";
 
-const titleColors = [
+export const titleColors = [
   "text-blue-300",
   "text-green-300",
   "text-orange-300",
@@ -31,18 +31,18 @@ export default function BlogCard({
     <Card className="mb-2 mt-2 min-w-96 bg-slate-900">
       <CardHeader>
         <CardTitle
-          className={`text-xl ${SelectRandomListElement<string>(titleColors)}`}
+          className={`font-mono text-xl ${SelectRandomListElement<string>(titleColors)}`}
         >
           {post.title}
         </CardTitle>
-        <CardDescription className="">
+        <CardDescription className="font-mono">
           Author: {post.author} | Posted: {post.createdAt?.toDateString()} |
           Updated: {post.updatedAt?.toDateString()}
         </CardDescription>
       </CardHeader>
       <CardContent>{post.content.substring(0, 500)}...</CardContent>
       <CardFooter>
-        <Link className="hover:text-blue-300" href={`/blog/posts/${post.id}/`}>
+        <Link className="hover:text-blue-300" href={`/blog-post/${post.id}/`}>
           Read full post...
         </Link>
       </CardFooter>
