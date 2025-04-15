@@ -19,7 +19,7 @@ export default async function BlogPostPage({
 }) {
   let showHeader = false;
   let pageNumber: number;
-  const numberOfPosts = 2;
+  const numberOfPosts = 3;
 
   const { slug } = await params;
 
@@ -30,7 +30,25 @@ export default async function BlogPostPage({
     pageNumber = parseInt(slug);
   }
 
-  const blogPosts = await GetBlogPosts(pageNumber, numberOfPosts);
+  const blogPosts: BlogPost[] = await GetBlogPosts(
+    pageNumber,
+    numberOfPosts + 1,
+  ); // Extra post used to check for next page
+
+  const blogPostsJSX: React.JSX.Element[] = [];
+
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
+  for (let postNumber = 0; postNumber < blogPosts.length; postNumber++) {
+    const post = blogPosts[postNumber];
+
+    if (post !== undefined) {
+      blogPostsJSX.push(
+        <div key={blogPosts[postNumber]?.id}>
+          <BlogCard post={post} />
+        </div>,
+      );
+    }
+  }
 
   return (
     <>
@@ -39,32 +57,28 @@ export default async function BlogPostPage({
         <div className="m-4 rounded-md bg-slate-700 bg-opacity-40 p-4 text-black shadow-sm shadow-black dark:text-white md:mb-10 md:ml-40 md:mr-40 md:p-10">
           {showHeader && <BlogHeader />}
           <div className="w-full border-spacing-4 border-b border-slate-500" />
-          <div className="min-h-40 min-w-full">
-            {blogPosts.map((post): React.ReactNode => {
-              return (
-                <div key={post.id}>
-                  <BlogCard post={post} />
-                </div>
-              );
-            })}
-          </div>
+          <div className="min-h-40 min-w-full">{blogPostsJSX}</div>
           <div className="w-full border-spacing-4 border-b border-slate-500" />
           <div className="flex w-full items-center justify-center">
             <Pagination className="justify-center">
               <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    href={`/blog/${pageNumber - 1}`}
-                  ></PaginationPrevious>
-                </PaginationItem>
+                {pageNumber != 1 && (
+                  <PaginationItem>
+                    <PaginationPrevious
+                      href={`/blog/${pageNumber - 1}`}
+                    ></PaginationPrevious>
+                  </PaginationItem>
+                )}
                 <PaginationItem>
                   <p className="text-md ml-2 mr-2 rounded-md border border-blue-500 pb-1 pl-2 pr-2 pt-1">
                     {pageNumber}
                   </p>
                 </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext href={`/blog/${pageNumber + 1}`} />
-                </PaginationItem>
+                {blogPosts.length > numberOfPosts && (
+                  <PaginationItem>
+                    <PaginationNext href={`/blog/${pageNumber + 1}`} />
+                  </PaginationItem>
+                )}
               </PaginationContent>
             </Pagination>
           </div>
