@@ -4,12 +4,7 @@ import type BlogPost from "~/components/types/BlogPost";
 import { db } from "~/server/db";
 import { SelectRandomListElement } from "~/lib/utils";
 import { titleColors } from "~/components/client/blog_card/blog_card";
-import { Remarkable } from "remarkable";
-import hljs from "highlight.js";
-
-// CSS imports for markdown content.
-import "./blog-post.css";
-import "highlight.js/styles/monokai-sublime.css";
+import GenerateMarkdown from "~/lib/markdown/generate_markdown";
 
 export default async function BlogPostPage({
   params,
@@ -26,30 +21,8 @@ export default async function BlogPostPage({
     redirect("/not-found");
   }
 
-  const markdownParser = new Remarkable("full", {
-    html: true,
-    xhtmlOut: true,
-    breaks: true,
-    highlight: function (str, lang) {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(str, { language: lang }).value;
-        } catch (err) {
-          console.log("Error highlighting code: ", err);
-        }
-      }
-
-      return "";
-    },
-  });
-
-  console.log("Post: ", post);
-
-  const htmlContent = {
-    __html: markdownParser.render(post.content),
-  } as {
-    __html: string;
-  };
+  // Transforms the markdown content into HTML.
+  const content = GenerateMarkdown(post);
 
   return (
     <>
@@ -66,7 +39,7 @@ export default async function BlogPostPage({
             Updated: {post.updatedAt?.toDateString()}
           </p>
           <div className="w-full border-spacing-4 border-b border-slate-500" />
-          <div className="mb-4 mt-4" dangerouslySetInnerHTML={htmlContent} />
+          <div className="mb-4 mt-4" dangerouslySetInnerHTML={content} />
           <div className="w-full border-spacing-4 border-b border-slate-500" />
         </div>
       </div>
