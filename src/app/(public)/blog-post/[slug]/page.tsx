@@ -4,7 +4,7 @@ import type BlogPost from "~/components/types/BlogPost";
 import { db } from "~/server/db";
 import { SelectRandomListElement } from "~/lib/utils";
 import { titleColors } from "~/components/client/blog_card/blog_card";
-import GenerateMarkdown from "~/lib/markdown/generate_markdown";
+import MarkdownComponent from "~/lib/markdown/generate_markdown";
 
 export default async function BlogPostPage({
   params,
@@ -21,9 +21,6 @@ export default async function BlogPostPage({
     redirect("/not-found");
   }
 
-  // Transforms the markdown content into HTML.
-  const content = GenerateMarkdown(post);
-
   return (
     <>
       <div className="m-16" />
@@ -39,7 +36,7 @@ export default async function BlogPostPage({
             Updated: {post.updatedAt?.toDateString()}
           </p>
           <div className="w-full border-spacing-4 border-b border-slate-500" />
-          <div className="mb-4 mt-4" dangerouslySetInnerHTML={content} />
+          <MarkdownComponent content={post.content} />
           <div className="w-full border-spacing-4 border-b border-slate-500" />
         </div>
       </div>
