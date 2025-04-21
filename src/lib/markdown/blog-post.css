@@ -1,0 +1,86 @@
+/* This is the css that is needed for the markdown. */
+
+.markdown {
+  @apply mb-5 rounded-md border border-gray-700 p-4 dark:bg-gray-800;
+}
+
+.markdown > h1,
+.markdown > h2,
+.markdown > h3,
+.markdown > h4,
+.markdown > h5,
+.markdown > h6 {
+  @apply mb-4 font-bold underline;
+}
+
+.markdown h1 {
+  @apply text-3xl;
+}
+
+.markdown h2 {
+  @apply text-2xl;
+}
+
+.markdown h3 {
+  @apply text-xl;
+}
+
+.markdown h4 {
+  @apply text-lg;
+}
+
+.markdown h5 {
+  @apply text-base;
+}
+
+.markdown h6 {
+  @apply text-sm;
+}
+
+.markdown pre {
+  @apply mb-2 mt-2 w-full rounded-md border border-gray-700 bg-gray-900 p-4;
+}
+
+.markdown pre * {
+  @apply text-wrap;
+}
+
+.markdown ul {
+  @apply ml-8 list-disc dark:text-gray-100;
+}
+
+.markdown ol {
+  @apply ml-8 list-decimal dark:text-gray-100;
+}
+
+.markdown li {
+  @apply mb-3;
+}
+
+.markdown li p {
+  @apply ml-2;
+}
+
+.markdown p {
+  @apply mb-2 text-gray-200 dark:text-gray-100;
+}
+
+.markdown a {
+  @apply text-blue-500 underline dark:text-blue-400;
+}
+
+.markdown table {
+  @apply w-full table-auto rounded-md border border-gray-700 bg-slate-900 p-4 text-sm;
+}
+
+.markdown table thead {
+  @apply bg-blue-950 text-gray-200;
+}
+
+.markdown table * {
+  @apply border border-slate-600 p-2 text-center;
+}
+
+.markdown img {
+  @apply mx-auto mb-4 mt-4 rounded-md border-4 border-gray-600 shadow-sm shadow-black;
+}
