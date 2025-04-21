@@ -82,5 +82,5 @@
 }
 
 .markdown img {
-  @apply mx-auto mb-4 mt-4 rounded-md border-4 border-blue-800 shadow-sm shadow-black;
+  @apply mx-auto mb-4 mt-4 rounded-md border-4 border-gray-600 shadow-sm shadow-black;
 }
