@@ -80,3 +80,7 @@
 .markdown table * {
   @apply border border-slate-600 p-2 text-center;
 }
+
+.markdown img {
+  @apply mx-auto mb-4 mt-4 rounded-md border-4 border-blue-800 shadow-sm shadow-black;
+}
