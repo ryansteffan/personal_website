@@ -1,0 +1,22 @@
+/* This is the css that is needed for the markdown. */
+
+h1:not(.not_md),
+h2:not(.not_md),
+h3:not(.not_md),
+h4:not(.not_md),
+h5:not(.not_md),
+h6:not(.not_md) {
+  @apply mb-4 font-bold underline dark:text-gray-100;
+}
+
+h1:not(.not_md) {
+  @apply text-3xl;
+}
+
+h2:not(.not_md) {
+  @apply text-2xl;
+}
+
+pre:not(.not_md) {
+  @apply rounded-md bg-black/50 p-4;
+}
