@@ -1,15 +1,7 @@
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import type BlogPost from "~/components/types/BlogPost";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 import { db } from "~/server/db";
-import { blogPosts } from "~/server/db/schema";
 import { SelectRandomListElement } from "~/lib/utils";
 import { titleColors } from "~/components/client/blog_card/blog_card";
 

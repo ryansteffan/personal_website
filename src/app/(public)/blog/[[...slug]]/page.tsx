@@ -70,7 +70,7 @@ export default async function BlogPostPage({
                   </PaginationItem>
                 )}
                 <PaginationItem>
-                  <p className="text-md ml-2 mr-2 rounded-md border border-blue-500 pb-1 pl-2 pr-2 pt-1">
+                  <p className="text-md mb-1 ml-2 mr-2 mt-1 rounded-md border border-blue-500 pb-1 pl-2 pr-2 pt-1">
                     {pageNumber}
                   </p>
                 </PaginationItem>
@@ -109,7 +109,7 @@ async function GetBlogPosts(cursor: number, pageSize = 3): Promise<BlogPost[]> {
   return await db
     .select()
     .from(blogPosts)
-    .where(gt(blogPosts.id, cursor * pageSize - pageSize))
+    .offset((cursor - 1) * pageSize)
     .limit(pageSize)
     .orderBy(desc(blogPosts.updatedAt));
 }
