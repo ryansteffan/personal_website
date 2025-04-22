@@ -18,7 +18,6 @@ import { Input } from "~/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import EditPostResponse from "~/components/types/edit_post_response";
-import { PostsCombobox } from "~/components/ui/combobox";
 import BlogPost from "~/components/types/BlogPost";
 import {
   Popover,
@@ -39,16 +38,9 @@ import {
 } from "~/components/ui/command";
 
 export default function EditPostForm() {
-  const languages = [];
   const router = useRouter();
   const [posts, setPosts] = useState<PostsIds[]>([]);
   const [postSelectionOpen, setPostSelectionOpen] = useState(false);
-  const [existingPost, setExistingPost] = useState<BlogPost | null>(null);
-  const [defaultValues, setDefaultValues] = useState({
-    title: "",
-    author: "",
-    content: "",
-  });
 
   useEffect(() => {
     fetch("/priv/api/blog/get_post_ids")
@@ -63,7 +55,11 @@ export default function EditPostForm() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof editPostSchema>>({
     resolver: zodResolver(editPostSchema),
-    defaultValues: defaultValues,
+    defaultValues: {
+      title: "",
+      author: "",
+      content: "",
+    },
   });
 
   // 2. Define a submit handler.
@@ -98,27 +94,12 @@ export default function EditPostForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
-        {/* Use the external Combo Box */}
-        {/* <FormField
-          control={form.control}
-          name="postId"
-          render={({ field }) => (
-            <FormItem className="mb-4">
-              <FormLabel>Post ID</FormLabel>
-              <FormControl>
-                <PostsCombobox value={field.value} onChange={field.onChange} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
-
         <FormField
           control={form.control}
           name="postId"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Language</FormLabel>
+              <FormLabel>Post to Edit...</FormLabel>
               <Popover
                 open={postSelectionOpen}
                 onOpenChange={setPostSelectionOpen}
@@ -129,7 +110,7 @@ export default function EditPostForm() {
                       variant="outline"
                       role="combobox"
                       className={cn(
-                        "w-[200px] justify-between",
+                        "w-[200px] justify-between bg-transparent hover:bg-slate-500",
                         !field.value && "text-muted-foreground",
                       )}
                     >
@@ -142,28 +123,20 @@ export default function EditPostForm() {
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className="w-[200px] p-0">
-                  <Command>
+                  <Command className="bg-slate-900">
                     <CommandInput placeholder="Select a Post to Edit..." />
                     <CommandList>
-                      <CommandEmpty>No language found.</CommandEmpty>
+                      <CommandEmpty>Not Posts Found.</CommandEmpty>
                       <CommandGroup>
                         {posts.map((post) => (
                           <CommandItem
                             value={post.postId as unknown as string}
                             key={post.postId}
+                            className="data-[selected=true]:!bg-slate-500"
                             onSelect={async () => {
                               form.setValue("postId", post.postId);
                               setPostSelectionOpen(false);
                               const existingPost = await fetchPost(post.postId);
-                              // console.log(
-                              //   "Existing Post: ",
-                              //   existingPost.content,
-                              // );
-                              // setDefaultValues({
-                              //   title: existingPost.title,
-                              //   author: existingPost.author,
-                              //   content: existingPost.content,
-                              // });
                               form.reset({
                                 postId: post.postId,
                                 title: existingPost.title,
@@ -230,7 +203,7 @@ export default function EditPostForm() {
               <FormControl>
                 <Textarea
                   placeholder="Content"
-                  className="h-52 resize-none"
+                  className="h-48 resize-y"
                   {...field}
                 />
               </FormControl>
@@ -243,7 +216,7 @@ export default function EditPostForm() {
           className="mb-4 bg-slate-700 text-white hover:bg-slate-500"
           type="submit"
         >
-          Create Post
+          Update Post
         </Button>
       </form>
     </Form>

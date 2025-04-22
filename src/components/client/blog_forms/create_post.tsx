@@ -99,7 +99,7 @@ export default function CreatePostForm() {
               <FormControl>
                 <Textarea
                   placeholder="Content"
-                  className="h-52 resize-none"
+                  className="h-48 resize-y"
                   {...field}
                 />
               </FormControl>
