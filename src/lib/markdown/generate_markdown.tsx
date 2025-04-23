@@ -55,7 +55,7 @@ export default function MarkdownComponent({
     <>
       <div className={className}>
         <div
-          className="markdown mb-4 mt-4"
+          className="markdown"
           dangerouslySetInnerHTML={GenerateMarkdown(content)}
         />
       </div>

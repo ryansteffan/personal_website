@@ -11,6 +11,7 @@ import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";
 import { asc, desc, gt, gte } from "drizzle-orm";
 import BlogPost from "~/components/types/BlogPost";
+import { redirect } from "next/navigation";
 
 export default async function BlogPostPage({
   params,
@@ -22,6 +23,10 @@ export default async function BlogPostPage({
   const numberOfPosts = 3;
 
   const { slug } = await params;
+
+  if (isNaN(parseInt(slug?.toString() ?? "1"))) {
+    redirect("/not-found");
+  }
 
   if (slug === undefined || slug == "1") {
     showHeader = true;
@@ -54,7 +59,7 @@ export default async function BlogPostPage({
     <>
       <div className="m-16" />
       <div className="flex flex-col items-center justify-center">
-        <div className="m-4 rounded-md bg-slate-700 bg-opacity-40 p-4 text-black shadow-sm shadow-black dark:text-white md:mb-10 md:ml-40 md:mr-40 md:p-10">
+        <div className="m-4 w-3/4 rounded-md bg-slate-700 bg-opacity-40 p-4 text-black shadow-sm shadow-black dark:text-white md:mb-10 md:ml-40 md:mr-40 md:p-10">
           {showHeader && <BlogHeader />}
           <div className="w-full border-spacing-4 border-b border-slate-500" />
           <div className="min-h-40 min-w-full">{blogPostsJSX}</div>
@@ -113,3 +118,5 @@ async function GetBlogPosts(cursor: number, pageSize = 3): Promise<BlogPost[]> {
     .limit(pageSize)
     .orderBy(desc(blogPosts.updatedAt));
 }
+
+async function GetNumberOfBlogs(): Promise<number> {}
