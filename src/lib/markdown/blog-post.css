@@ -1,7 +1,7 @@
 /* This is the css that is needed for the markdown. */
 
 .markdown {
-  @apply p-4 font-mono;
+  @apply p-4 font-sans;
 }
 
 .markdown > h1,

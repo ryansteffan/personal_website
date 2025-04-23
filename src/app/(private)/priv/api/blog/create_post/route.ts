@@ -6,7 +6,7 @@ import DOMPurify from "dompurify";
 import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";
 import { NextResponse } from "next/server";
-import CreatePostResponse from "~/components/types/create_post_response";
+import type CreatePostResponse from "~/components/types/create_post_response";
 
 export async function POST(request: Request) {
   await auth.protect();

@@ -2,13 +2,12 @@
 import editPostSchema from "~/lib/edit_post_schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { set, z } from "zod";
+import { type z } from "zod";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,8 +16,8 @@ import {
 import { Input } from "~/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import EditPostResponse from "~/components/types/edit_post_response";
-import BlogPost from "~/components/types/BlogPost";
+import type EditPostResponse from "~/components/types/edit_post_response";
+import type BlogPost from "~/components/types/BlogPost";
 import {
   Popover,
   PopoverContent,
@@ -26,7 +25,7 @@ import {
 } from "~/components/ui/popover";
 import { cn } from "~/lib/utils";
 import { useEffect, useState } from "react";
-import { PostsIds } from "~/components/types/post_ids_response";
+import { type PostsIds } from "~/components/types/post_ids_response";
 import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Command,

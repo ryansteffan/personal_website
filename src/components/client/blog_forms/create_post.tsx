@@ -2,13 +2,12 @@
 import createPostSchema from "~/lib/create_post_schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { type z } from "zod";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,7 +16,7 @@ import {
 import { Input } from "~/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import CreatePostResponse from "~/components/types/create_post_response";
+import type CreatePostResponse from "~/components/types/create_post_response";
 
 export default function CreatePostForm() {
   const router = useRouter();

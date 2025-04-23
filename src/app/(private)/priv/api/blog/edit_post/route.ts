@@ -1,8 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import { z } from "zod";
-import EditPostResponse from "~/components/types/edit_post_response";
+import type { z } from "zod";
+import type EditPostResponse from "~/components/types/edit_post_response";
 import editPostSchema from "~/lib/edit_post_schema";
 import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";

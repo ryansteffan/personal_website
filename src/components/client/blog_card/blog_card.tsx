@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BlogPost from "~/components/types/BlogPost";
+import type BlogPost from "~/components/types/BlogPost";
 import {
   Card,
   CardContent,

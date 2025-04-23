@@ -2,10 +2,8 @@ import { relations, sql } from "drizzle-orm";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { int } from "drizzle-orm/mysql-core";
 import {
-  index,
   integer,
   pgTableCreator,
-  primaryKey,
   text,
   timestamp,
   varchar,

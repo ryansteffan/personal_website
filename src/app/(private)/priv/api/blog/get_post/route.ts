@@ -1,8 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import BlogPost from "~/components/types/BlogPost";
+import type BlogPost from "~/components/types/BlogPost";
 import { db } from "~/server/db";
-import { z } from "zod";
+import type { z } from "zod";
 import getPostScheme from "~/lib/get_post_schema";
 
 export async function POST(request: Request) {

@@ -3,16 +3,14 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
 import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";
-import { asc, count, desc, gt, gte } from "drizzle-orm";
-import BlogPost from "~/components/types/BlogPost";
+import { count, desc } from "drizzle-orm";
+import type BlogPost from "~/components/types/BlogPost";
 import { redirect } from "next/navigation";
-import { pages } from "next/dist/build/templates/app-page";
 
 export default async function BlogPostPage({
   params,
