@@ -3,10 +3,7 @@ import { NextResponse } from "next/server";
 import BlogPost from "~/components/types/BlogPost";
 import { db } from "~/server/db";
 import { z } from "zod";
-
-export const getPostScheme = z.object({
-  postId: z.number().int().positive(),
-});
+import getPostScheme from "~/lib/get_post_schema";
 
 export async function POST(request: Request) {
   await auth.protect();
