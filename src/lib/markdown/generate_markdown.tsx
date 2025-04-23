@@ -1,12 +1,10 @@
 import { Remarkable } from "remarkable";
 import { linkify } from "remarkable/linkify";
 import hljs from "highlight.js";
-import type BlogPost from "~/components/types/BlogPost";
 
 // CSS imports for markdown content.
 import "./blog-post.css";
 import "highlight.js/styles/monokai.css";
-import Renderer from "remarkable/lib/renderer";
 
 const defaultOptions = {
   html: true,
@@ -55,7 +53,7 @@ export default function MarkdownComponent({
     <>
       <div className={className}>
         <div
-          className="markdown mb-4 mt-4"
+          className="markdown"
           dangerouslySetInnerHTML={GenerateMarkdown(content)}
         />
       </div>

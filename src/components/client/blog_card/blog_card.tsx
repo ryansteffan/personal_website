@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BlogPost from "~/components/types/BlogPost";
+import type BlogPost from "~/components/types/BlogPost";
 import {
   Card,
   CardContent,
@@ -8,7 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import MarkdownComponent from "~/lib/markdown/generate_markdown";
 import { SelectRandomListElement } from "~/lib/utils";
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
 
 export const titleColors = [
   "text-blue-300",
@@ -27,6 +30,8 @@ export default function BlogCard({
 }: {
   post: BlogPost;
 }): React.ReactNode {
+  const domPurify = createDOMPurify(new JSDOM("").window);
+
   return (
     <Card className="mb-2 mt-2 min-w-96 bg-slate-900">
       <CardHeader>
@@ -36,13 +41,22 @@ export default function BlogCard({
           {post.title}
         </CardTitle>
         <CardDescription className="font-mono">
-          Author: {post.author} | Posted: {post.createdAt?.toDateString()} |
-          Updated: {post.updatedAt?.toDateString()}
+          Author: {domPurify.sanitize(post.author)} | Posted:{" "}
+          {domPurify.sanitize(post.createdAt?.toDateString())} | Updated:{" "}
+          {domPurify.sanitize(post.updatedAt?.toDateString())}
         </CardDescription>
+        <div className="w-full border-spacing-4 border-b border-slate-500" />
       </CardHeader>
-      <CardContent>{post.content.substring(0, 500)}...</CardContent>
+      <CardContent>
+        <MarkdownComponent
+          content={`${domPurify.sanitize(post.content.substring(0, 300))}...`}
+        />
+      </CardContent>
       <CardFooter>
-        <Link className="hover:text-blue-300" href={`/blog-post/${post.id}/`}>
+        <Link
+          className="hover:text-blue-300"
+          href={`/blog-post/${domPurify.sanitize(post.id.toString())}/`}
+        >
           Read full post...
         </Link>
       </CardFooter>

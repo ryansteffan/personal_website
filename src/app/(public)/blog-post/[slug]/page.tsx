@@ -5,6 +5,8 @@ import { db } from "~/server/db";
 import { SelectRandomListElement } from "~/lib/utils";
 import { titleColors } from "~/components/client/blog_card/blog_card";
 import MarkdownComponent from "~/lib/markdown/generate_markdown";
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
 
 export default async function BlogPostPage({
   params,
@@ -21,6 +23,8 @@ export default async function BlogPostPage({
     redirect("/not-found");
   }
 
+  const domPurify = createDOMPurify(new JSDOM("").window);
+
   return (
     <>
       <div className="m-16" />
@@ -29,14 +33,18 @@ export default async function BlogPostPage({
           <h1
             className={`${SelectRandomListElement<string>(titleColors)} not_md mb-4 font-mono text-3xl font-bold`}
           >
-            {post.title}
+            {domPurify.sanitize(post.title)}
           </h1>
           <p className="mb-4 font-mono text-sm">
-            Author: {post.author} | Posted: {post.createdAt?.toDateString()} |
-            Updated: {post.updatedAt?.toDateString()}
+            Author: {domPurify.sanitize(post.author)} | Posted:{" "}
+            {domPurify.sanitize(post.createdAt?.toDateString())} | Updated:{" "}
+            {domPurify.sanitize(post.updatedAt?.toDateString())}
           </p>
           <div className="w-full border-spacing-4 border-b border-slate-500" />
-          <MarkdownComponent content={post.content} />
+          <MarkdownComponent
+            content={domPurify.sanitize(post.content)}
+            className="mb-2 mt-2 rounded-lg bg-slate-900 p-4"
+          />
           <div className="w-full border-spacing-4 border-b border-slate-500" />
         </div>
       </div>

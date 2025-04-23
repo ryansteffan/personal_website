@@ -3,14 +3,14 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
 import { db } from "~/server/db";
 import { blogPosts } from "~/server/db/schema";
-import { asc, desc, gt, gte } from "drizzle-orm";
-import BlogPost from "~/components/types/BlogPost";
+import { count, desc } from "drizzle-orm";
+import type BlogPost from "~/components/types/BlogPost";
+import { redirect } from "next/navigation";
 
 export default async function BlogPostPage({
   params,
@@ -19,9 +19,14 @@ export default async function BlogPostPage({
 }) {
   let showHeader = false;
   let pageNumber: number;
-  const numberOfPosts = 3;
+  const numberOfPosts = 4;
 
   const { slug } = await params;
+  const totalNumberOfPosts = await GetNumberOfBlogs();
+
+  if (isNaN(parseInt(slug?.toString() ?? "1"))) {
+    redirect("/not-found");
+  }
 
   if (slug === undefined || slug == "1") {
     showHeader = true;
@@ -30,10 +35,12 @@ export default async function BlogPostPage({
     pageNumber = parseInt(slug);
   }
 
-  const blogPosts: BlogPost[] = await GetBlogPosts(
-    pageNumber,
-    numberOfPosts + 1,
-  ); // Extra post used to check for next page
+  const postsRemaining = totalNumberOfPosts - pageNumber * numberOfPosts;
+
+  console.log("Total number of posts: ", totalNumberOfPosts);
+  console.log("Posts remaining: ", postsRemaining);
+
+  const blogPosts: BlogPost[] = await GetBlogPosts(pageNumber, numberOfPosts);
 
   const blogPostsJSX: React.JSX.Element[] = [];
 
@@ -54,7 +61,7 @@ export default async function BlogPostPage({
     <>
       <div className="m-16" />
       <div className="flex flex-col items-center justify-center">
-        <div className="m-4 rounded-md bg-slate-700 bg-opacity-40 p-4 text-black shadow-sm shadow-black dark:text-white md:mb-10 md:ml-40 md:mr-40 md:p-10">
+        <div className="m-4 w-3/4 rounded-md bg-slate-700 bg-opacity-40 p-4 text-black shadow-sm shadow-black dark:text-white md:mb-10 md:ml-40 md:mr-40 md:p-10">
           {showHeader && <BlogHeader />}
           <div className="w-full border-spacing-4 border-b border-slate-500" />
           <div className="min-h-40 min-w-full">{blogPostsJSX}</div>
@@ -62,19 +69,20 @@ export default async function BlogPostPage({
           <div className="flex w-full items-center justify-center">
             <Pagination className="justify-center">
               <PaginationContent>
-                {pageNumber != 1 && (
-                  <PaginationItem>
-                    <PaginationPrevious
-                      href={`/blog/${pageNumber - 1}`}
-                    ></PaginationPrevious>
-                  </PaginationItem>
-                )}
+                {postsRemaining >= 0 &&
+                  postsRemaining + numberOfPosts != totalNumberOfPosts && (
+                    <PaginationItem>
+                      <PaginationPrevious
+                        href={`/blog/${pageNumber - 1}`}
+                      ></PaginationPrevious>
+                    </PaginationItem>
+                  )}
                 <PaginationItem>
                   <p className="text-md mb-1 ml-2 mr-2 mt-1 rounded-md border border-blue-500 pb-1 pl-2 pr-2 pt-1">
                     {pageNumber}
                   </p>
                 </PaginationItem>
-                {blogPosts.length > numberOfPosts && (
+                {postsRemaining > 0 && (
                   <PaginationItem>
                     <PaginationNext href={`/blog/${pageNumber + 1}`} />
                   </PaginationItem>
@@ -112,4 +120,12 @@ async function GetBlogPosts(cursor: number, pageSize = 3): Promise<BlogPost[]> {
     .offset((cursor - 1) * pageSize)
     .limit(pageSize)
     .orderBy(desc(blogPosts.updatedAt));
+}
+
+async function GetNumberOfBlogs(): Promise<number> {
+  const postCount = await db
+    .select({ count: count(blogPosts.id) })
+    .from(blogPosts);
+
+  return postCount[0]?.count ?? 0;
 }

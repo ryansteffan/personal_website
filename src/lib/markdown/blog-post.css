@@ -1,7 +1,7 @@
 /* This is the css that is needed for the markdown. */
 
 .markdown {
-  @apply mb-5 rounded-md border border-gray-700 p-4 dark:bg-gray-800;
+  @apply p-4 font-sans;
 }
 
 .markdown > h1,
@@ -38,7 +38,8 @@
 }
 
 .markdown pre {
-  @apply mb-2 mt-2 w-full rounded-md border border-gray-700 bg-gray-900 p-4;
+  @apply mb-2 mt-2 w-full rounded-md border border-gray-700 p-4;
+  background-color: rgb(35, 32, 41);
 }
 
 .markdown pre * {

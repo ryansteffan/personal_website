@@ -1,7 +1,6 @@
-import { Protect, SignOutButton } from "@clerk/nextjs";
+import { Protect } from "@clerk/nextjs";
 import ManagementHeader from "~/components/client/management_header/management_header";
-import { Button } from "~/components/ui/button";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export default async function Management() {
