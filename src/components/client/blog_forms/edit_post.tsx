@@ -66,29 +66,29 @@ export default function EditPostForm() {
   async function onSubmit(values: z.infer<typeof editPostSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    const data = { ...values, date: new Date() };
-    console.log("Form Data: ", values);
-    // try {
-    //   // Update to be a patch request
-    //   const result = await axios.post<EditPostResponse>(
-    //     "/priv/api/blog/create_post",
-    //     data,
-    //   );
 
-    //   if (result.status === 200) {
-    //     const postId = result.data.postId;
+    try {
+      // Update to be a patch request
+      const result = await axios.patch<EditPostResponse>(
+        "/priv/api/blog/edit_post",
+        values,
+      );
 
-    //     if (postId === undefined) {
-    //       router.push("/priv/management/blog/failure");
-    //     }
-    //     console.log("Post Created: ", postId);
-    //     router.push(`/blog-post/${postId}`);
-    //   } else {
-    //     console.log("Post Creation Failed!");
-    //   }
-    // } catch {
-    //   router.push("/priv/management/blog/failure");
-    // }
+      console.log("Post Updated: ", result.data);
+
+      if (result.status === 200) {
+        const postId = result.data.postId;
+
+        if (postId === undefined) {
+          router.push("/priv/management/blog/failure");
+        }
+        router.push(`/blog-post/${postId}`);
+      } else {
+        console.log("Post Update Failed!");
+      }
+    } catch {
+      router.push("/priv/management/blog/failure");
+    }
   }
 
   return (
@@ -98,7 +98,7 @@ export default function EditPostForm() {
           control={form.control}
           name="postId"
           render={({ field }) => (
-            <FormItem className="flex flex-col">
+            <FormItem className="mb-4 flex flex-col">
               <FormLabel>Post to Edit...</FormLabel>
               <Popover
                 open={postSelectionOpen}
