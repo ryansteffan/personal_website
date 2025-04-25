@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --build-arg CLERK_PUBLISHABLE_KEY=${{ secrets.CLERK_PUBLISHABLE_KEY }} --build-arg DOMAIN_NAMe=${{ secrets.DOMAIN_NAME }}
+      - run: flyctl deploy --remote-only --build-arg CLERK_PUBLISHABLE_KEY=${{ secrets.CLERK_PUBLISHABLE_KEY }} --build-arg DOMAIN_NAME=${{ secrets.DOMAIN_NAME }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
