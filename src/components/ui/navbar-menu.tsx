@@ -36,11 +36,13 @@ export const MenuItem = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
+          //@ts-expect-error Allow transition.
           transition={transition}
         >
           {active === item && (
             <div className="absolute left-1/2 top-[calc(100%_+_1.2rem)] -translate-x-1/2 transform pt-4">
               <motion.div
+                //@ts-expect-error Allow transition.
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
                 className="overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur-sm dark:border-white/[0.2] dark:bg-black"
