@@ -22,17 +22,17 @@ export default function AboutPage(): React.ReactNode {
           About Me...
         </h2>
         <p className="pt-3">
-          Hi, my name is Ryan and I am currently a fourth term Business
-          Information Technology student at Red River College Polytech in
-          Winnipeg. I am mainly focusing on Computer Networking and System
-          Administration, but I am also taking courses on programming and web
-          development. My main skills are working with Cisco networking
-          equipment, and Windows/Linux Servers. I have a passion for all kinds
-          of technology and enjoy learning about new tech whenever I have the
-          chance. In my free time I like to work on my home lab, play video and
-          build games, and work on my personal programming projects. If you want
-          to connect feel free to reach out to me on LinkedIn, Github, or via
-          the contact form on my website.
+          Hi my name is Ryan Steffan, and I am a recent graduate of the Red
+          River College Polytechnic&apos;s Business Information Technology
+          program. My skills mainly consist of Networking with Cisco equipment,
+          and System Administration with Windows and Linux servers. I also have
+          experience with programming and web development using languages such
+          as Python, C#, and TypeScript. I have a passion for all kinds of
+          technology and enjoy learning about new tech whenever I have the
+          chance. In my free time I like to work on my home lab, play video
+          games, and work on my personal programming projects. If you want to
+          connect feel free to reach out to me on LinkedIn, Github, or via the
+          contact form on my website.
         </p>
         <div className="flex justify-center pt-5">
           <a href="https://www.linkedin.com/in/ryan-steffan/">
