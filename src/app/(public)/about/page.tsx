@@ -25,7 +25,7 @@ export default function AboutPage(): React.ReactNode {
           Hi my name is Ryan Steffan, and I am a recent graduate of the Red
           River College Polytechnic&apos;s Business Information Technology
           program. My skills mainly consist of Networking with Cisco equipment,
-          and System Administration with Windows and Linux servers. I also have
+          and System Administration using Windows and Linux servers. I also have
           experience with programming and web development using languages such
           as Python, C#, and TypeScript. I have a passion for all kinds of
           technology and enjoy learning about new tech whenever I have the
@@ -38,7 +38,7 @@ export default function AboutPage(): React.ReactNode {
           <a href="https://www.linkedin.com/in/ryan-steffan/">
             <FaLinkedin size={50} className="m-2" />
           </a>
-          <a href="https://github.com/TheTurnnip/">
+          <a href="https://github.com/ryansteffan/">
             <FaGithub size={50} className="m-2" />
           </a>
         </div>
