@@ -1,12 +1,18 @@
-import { drizzle as pgDrizzle } from "drizzle-orm/postgres-js";
-import { drizzle as neonDrizzle } from "drizzle-orm/neon-http";
+import {
+  drizzle as pgDrizzle,
+  type PostgresJsDatabase,
+} from "drizzle-orm/postgres-js";
+import {
+  drizzle as neonDrizzle,
+  type NeonHttpDatabase,
+} from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import postgres from "postgres";
 
 import { env } from "~/env";
 import * as schema from "./schema";
 
-let db = undefined;
+let db: PostgresJsDatabase<typeof schema> | NeonHttpDatabase<typeof schema>;
 
 if (env.NODE_ENV !== "production") {
   /**
@@ -24,7 +30,7 @@ if (env.NODE_ENV !== "production") {
   db = pgDrizzle(conn, { schema });
 } else {
   console.log("Using the NEON Driver!");
-  db = neonDrizzle(neon(env.DATABASE_URL));
+  db = neonDrizzle(neon(env.DATABASE_URL), { schema });
 }
 
 export { db };
