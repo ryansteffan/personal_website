@@ -9,8 +9,10 @@ export default function Loading() {
   const [loadingWord, setLoadingWord] = useState<string>(fullWord);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function BuildWord() {
-      while (true) {
+      while (isMounted) {
         await sleep(750);
         setLoadingWord("");
         for (const letter of fullWord) {
@@ -20,7 +22,12 @@ export default function Loading() {
       }
     }
     void BuildWord();
-  }, []);
+
+    return () => {
+      isMounted = false;
+      setLoadingWord("");
+    };
+  }, [fullWord]);
   return (
     <>
       <div className="mx-auto my-32 mb-10 w-1/4 rounded-md border border-blue-600 bg-slate-700 bg-opacity-40 p-5 text-center font-mono text-lg shadow-md shadow-black">
