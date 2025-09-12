@@ -6,7 +6,6 @@ import { Header } from "~/components/client/header/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "Ryan Steffan - Home",
