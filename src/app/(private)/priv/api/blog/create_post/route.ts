@@ -33,11 +33,11 @@ export async function POST(request: Request) {
         createdAt: date,
         updatedAt: date,
       })
-      .returning({ postId: blogPosts.id });
+      .returning();
 
     const responseData: CreatePostResponse = {
       message: "Post created successfully!",
-      postId: postID[0]?.postId.toString(),
+      postId: postID[0]?.id.toString(),
     };
 
     return NextResponse.json(responseData, { status: 200 });
