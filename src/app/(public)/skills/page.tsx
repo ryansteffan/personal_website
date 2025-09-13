@@ -147,6 +147,28 @@ export default function SkillsPage(): React.ReactNode {
     },
     {
       Skill: {
+        SkillName: "Cloud Computing",
+        SkillDescription: (
+          <>
+            <p>
+              I have worked with various cloud computing platforms such as
+              Microsoft Azure, and Amazon Web Services (AWS).
+            </p>
+            <p className="pt-3">I have experience with:</p>
+            <ul className="list-inside list-disc space-y-2 pl-2">
+              <li>Creating Virtual Machines in AWS, and Azure</li>
+              <li>Creating and Managing Databases (DynamoDB)</li>
+              <li>
+                Creating and Coding Azure Functions and AWS Lambada Functions
+              </li>
+              <li>Setting up IAM Users and Roles</li>
+            </ul>
+          </>
+        ),
+      },
+    },
+    {
+      Skill: {
         SkillName: "Database Management",
         SkillDescription: (
           <>
