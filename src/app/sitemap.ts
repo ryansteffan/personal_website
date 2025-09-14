@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { env } from "~/env.js";
+import { db } from "~/server/db";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const defaultPages = [
@@ -34,7 +35,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
   ];
-  const sitemap = [...defaultPages];
+  const sitemap = [...defaultPages, ...(await GetBlogPosts())];
 
   return sitemap;
+}
+
+// Adds blogs to the sitemap.
+async function GetBlogPosts() {
+  const result = await db.query.blogPosts.findMany();
+
+  const blogPostSitemap = [];
+
+  for (const post of result) {
+    blogPostSitemap.push({
+      url: `https://${env.DOMAIN_NAME}/blog-post/${post.id}`,
+      lastModified: post.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    });
+  }
+
+  return blogPostSitemap;
 }
