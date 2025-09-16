@@ -7,6 +7,36 @@ import { titleColors } from "~/components/client/blog_card/blog_card";
 import MarkdownComponent from "~/lib/markdown/generate_markdown";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
+import type { Metadata } from "next";
+
+async function GetBlogPost(postId: number): Promise<BlogPost> {
+  const blogPost = await db.query.blogPosts.findFirst({
+    where: (blogPosts) => eq(blogPosts.id, postId),
+  });
+
+  return blogPost as BlogPost;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const blogPost = await GetBlogPost(parseInt(slug));
+  const description = blogPost.content.substring(0, 300) + "...";
+
+  return {
+    title: blogPost.title,
+    description: description,
+    openGraph: {
+      title: blogPost.title,
+      description: description,
+    },
+    authors: [{ name: blogPost.author }],
+    keywords: ["blog", "ryan steffan", blogPost.title],
+  };
+}
 
 export default async function BlogPostPage({
   params,
@@ -50,12 +80,4 @@ export default async function BlogPostPage({
       </div>
     </>
   );
-}
-
-async function GetBlogPost(postId: number): Promise<BlogPost> {
-  const blogPost = await db.query.blogPosts.findFirst({
-    where: (blogPosts) => eq(blogPosts.id, postId),
-  });
-
-  return blogPost as BlogPost;
 }
