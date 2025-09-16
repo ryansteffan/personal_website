@@ -11,6 +11,19 @@ import { blogPosts } from "~/server/db/schema";
 import { count, desc } from "drizzle-orm";
 import type BlogPost from "~/components/types/BlogPost";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ryan's Ramblings - Blog",
+  description:
+    "This is my blog where I share my thoughts on programming, technology, and networking. I plan to posts about some of the projects that I am working on and maybe make some tutorials about new things I have leaned or I wished I would have known when I started programming.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: ["Ryan Steffan", "about me", "portfolio", "website", "bio"],
+  authors: [{ name: "Ryan Steffan", url: "https://ryansteffan.com" }],
+};
 
 export default async function BlogPostPage({
   params,
