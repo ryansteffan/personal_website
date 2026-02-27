@@ -66,22 +66,22 @@ export default function ProjectsPage(): React.ReactNode {
       topics: ["Python", "Syslog", "Docker", "Networking"],
     },
     {
-      title: "My NeoVIM Config",
-      description:
-        "This is a repository that contains my NeoVIM configuration files. \
-        It is based on kickstart.nvim and changes very little from the original.\
-        It just has a few tweaks that get it to work my way.",
-      url: "https://github.com/RyanSteffan/kickstart.nvim",
-      topics: ["lua", "NeoVIM", "dotfiles"],
+      title: "AWSCraft",
+      description: "AWSCraft is a project that I have been working on to allow for easy and \
+        cost effective hosting of a Minecraft server on AWS using Terraform. \
+        Users setup a Minecraft server on their host machine, and then use a helper script \
+        to deploy to AWS, using sane defaults.
+      url: "https://github.com/ryansteffan/AWSCraft",
+      topics: ["Python", "AWS", "Minecraft", "Terraform"],
     },
     {
-      title: "WezTermConfig",
+      title: "AWSCraftConnect",
       description:
-        "This is a repository that contains my config for the terminal emulator WezTerm. \
-                    Like my NeoVIM config, it is pretty basic and just has a few tweaks. It is intended \
-                    to be cross-platform and work on both Windows and Linux.",
-      url: "https://github.com/RyanSteffan/WezTermConfig",
-      topics: ["lua", "WezTerm", "dotfiles"],
+        "AWSCraftConnect is a Minecraft Java Edition mod intended to work alongside the AWSCraft project. \
+        It is a simple mod that allows for easy connection to an AWSCraft server, by handling starting servers, \
+        and retrieving the server IP address.",
+      url: "https://github.com/RyanSteffan/awscraftconnect",
+      topics: ["Java", "Minecraft", "Modding", "AWSCraft"],
     },
     {
       title: "MCServerRegen",
