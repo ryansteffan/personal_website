@@ -70,7 +70,7 @@ export default function ProjectsPage(): React.ReactNode {
       description: "AWSCraft is a project that I have been working on to allow for easy and \
         cost effective hosting of a Minecraft server on AWS using Terraform. \
         Users setup a Minecraft server on their host machine, and then use a helper script \
-        to deploy to AWS, using sane defaults.
+        to deploy to AWS, using sane defaults.",
       url: "https://github.com/ryansteffan/AWSCraft",
       topics: ["Python", "AWS", "Minecraft", "Terraform"],
     },
