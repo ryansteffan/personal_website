@@ -1,4 +1,4 @@
-import { Protect } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import ManagementHeader from "~/components/client/management_header/management_header";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -12,10 +12,10 @@ export default async function Management() {
 
   return (
     <>
-      <Protect>
+      <ClerkProvider>
         <ManagementHeader pageName="Home" />
         <h1>Hello World</h1>
-      </Protect>
+      </ClerkProvider>
     </>
   );
 }
