@@ -96,7 +96,7 @@ async function SendMail(
 ) {
   const poller = await mailClient.beginSend(contactMessage);
 
-  if (!poller.getOperationState().isStarted) {
+  if (poller.getOperationState().status === "notStarted") {
     throw Error("Poller was not started.");
   }
 
